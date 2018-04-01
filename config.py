@@ -48,3 +48,5 @@ sig = (
     "\n_____\n\n^(I\'m a hand-run bot, *bleep* *bloop* "
     "| Send praise, rage or arcade game tokens to /u/" + AUTHOR + ", *beep*)"
 )
+
+already_visited = []
