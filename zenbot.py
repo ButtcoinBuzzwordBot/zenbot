@@ -1,7 +1,7 @@
 # I'm the Zen Bot. Bleep bloop!
 # TODO: mysql, memcache, log4 support
 # TODO: randomize types of replies
-# FIX: visited submissions and comments not sticking?
+# TODO: add "delete if downvoted" functionality.
 
 import sys
 import random
@@ -43,35 +43,41 @@ def main(r):
         print("Please read before running bot.")
         if len(msgs) > cfg.MAX_MSGS: exit()
 
-    while True:
-        sub = r.subreddit(cfg.SUBREDDIT).new(limit=30)
-        for submission in sub:
-            post = r.submission(submission)
-            c = comments.Comments(dbase, r, post)
+    try:
+        while True:
+            sub = r.subreddit(cfg.SUBREDDIT).new(limit=40)
+            for submission in sub:
+                post = r.submission(submission)
+                c = comments.Comments(dbase, r, post)
 
-            if cfg.DEBUG: print("submission: " + format(post.id))
-            # Figure out how to randomize order for variety.
-            # Put Snappy quotes in DB to pull random.
-            if not c.alreadyVisited(post.id):
-                cfg.already_visited.append(str(post.id))
-                if random.randrange(0, cfg.HAIKU_ODDS) < 1:
-                    c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
-                elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
-                    i = random.randrange(0, len(cfg.snappy_quotes) -1)
-                    c.postReply(cfg.snap_reply +"\""+ cfg.snappy_quotes[i] +"\"")
-                elif random.randrange(0, cfg.KOAN_ODDS) < 1:
-                    c.postReply(dbase.readRandom(cfg.KOAN_STORE))
+                if cfg.DEBUG: print("submission: " + format(post.id))
+                # Figure out how to randomize order for variety.
+                # Put Snappy quotes in DB to pull random.
+                if not c.alreadyVisited(post.id):
+                    cfg.already_visited.append(str(post.id))
+                    if random.randrange(0, cfg.HAIKU_ODDS) < 1:
+                        c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
+                    elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
+                        i = random.randrange(0, len(cfg.snappy_quotes) -1)
+                        c.postReply(cfg.snap_reply +"\""+ cfg.snappy_quotes[i] +"\"")
+                    elif random.randrange(0, cfg.KOAN_ODDS) < 1:
+                        c.postReply(dbase.readRandom(cfg.KOAN_STORE))
 
-            dbase.writeVisited()
-            for comment in post.comments:
-                c.checkComment(comment)
+                dbase.writeVisited()
+                for comment in post.comments:
+                    c.checkComment(comment)
 
-        if not cfg.HOSTED:
-            print("\nBleep! All done.")
-            break
-        else: time.sleep(60 * 10)
+            if not cfg.HOSTED:
+                print("\nBleep! All done.")
+                break
+            else: time.sleep(60 * 10)
 
-    dbase.closeDB()
+        dbase.closeDB()
+
+    except:
+        if cfg.DEBUG: traceback.print_exc()
+        time.sleep(30)
+        if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
 
 if __name__ == '__main__':
     main(r)

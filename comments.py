@@ -50,7 +50,7 @@ class Comments:
             self.checkComment(subcomment)
 
         if self.alreadyVisited(comment): return
-        if (TRIGGER in comment.body):
+        if (cfg.TRIGGER in comment.body):
             cfg.already_visited.append(str(self.comment.id))
         if (cfg.CMD_KOAN in comment.body):
             self.postReply(self.db.readRandom(cfg.KOAN_STORE))
