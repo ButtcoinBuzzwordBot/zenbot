@@ -37,15 +37,14 @@ def main(r):
                 c = comments.Comments(dbase, r, post)
 
                 if cfg.DEBUG: print("submission: " + format(post.id))
-                # Figure out how to randomize order for variety.
-                # Put Snappy quotes in DB to pull random.
+                # TODO: Figure out how to randomize order for variety.
+                # TODO: Put Snappy quotes in DB to pull random.
                 if not c.alreadyVisited(post.id):
                     cfg.already_visited.append(str(post.id))
                     if random.randrange(0, cfg.HAIKU_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
                     elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
-                        i = random.randrange(0, len(cfg.snappy_quotes) -1)
-                        c.postReply(cfg.snap_reply +"\""+ cfg.snappy_quotes[i] +"\"")
+                        c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
 

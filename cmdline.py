@@ -32,19 +32,6 @@ def processOpts (db, argv) -> None:
         exit(2)
 
     table = argv[2]
-    if table == "koans":
-        try:
-            cfg.CMD_KOAN
-        except NameError:
-            print("Koans are disabled. Please set CMD_KOAN to use.")
-            exit()
-    elif table == "haiku":
-        try:
-            cfg.CMD_HAIKU
-        except NameError:
-            print("Haiku are disabled. Please set CMD_HAIKU to use.")
-            exit()
-
     dataf = open(table + ".txt", "r")
     data = dataf.read().split("|")
     dataf.close()

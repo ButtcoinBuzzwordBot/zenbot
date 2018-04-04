@@ -3,7 +3,6 @@ import re
 import random
 import sqlite3
 # TODO: import PyMySQL as mysql
-# TODO: test file support after rewrite, globs to config file.
 
 import config as cfg
 

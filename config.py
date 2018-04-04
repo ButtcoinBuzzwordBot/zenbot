@@ -41,7 +41,7 @@ CMD_HAIKU = TRIGGER + " haiku"
 CMD_SNAPPY = TRIGGER + "snappy"
 
 # Reply for Snapshillbot quote.
-snap_reply = "The Zen Master /u/Snapshillbot whispered into my ear:\n\n"
+snap_reply = "\n&nbsp;  \n^^by ^The ^Zen ^Master ^/u/Snapshillbot"
 
 # Signature for all replies.
 sig = (
