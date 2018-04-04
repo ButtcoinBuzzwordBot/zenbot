@@ -1,7 +1,7 @@
 # I'm the Zen Bot. Bleep bloop!
 # TODO: mysql, memcache, log4 support
 # TODO: randomize types of replies
-# TODO: add "delete if downvoted" functionality.
+# TODO: raise/lower frequency based on up/downvotes?
 
 import sys
 import random
@@ -11,21 +11,7 @@ import db
 import comments
 import config as cfg
 import cmdline
-
-# Initialize PRAW with custom User-Agent.
-if cfg.DEBUG:
-    cfg.SUBREDDIT = "testingground4bots"
-    print("Username/pass: " + cfg.ZENBOT_USERNAME, cfg.ZENBOT_PASSWORD)
-    print("Client ID/pass: " + cfg.ZENBOT_ID, cfg.ZENBOT_SECRET)
-    print("Authenticating...")
-r = praw.Reddit(
-    client_id=cfg.ZENBOT_ID,
-    client_secret=cfg.ZENBOT_SECRET,
-    password=cfg.ZENBOT_PASSWORD,
-    user_agent=cfg.BOTNAME,
-    username=cfg.ZENBOT_USERNAME
-)
-if cfg.DEBUG: print("Authenticated as: " + format(r.user.me()))
+import oauth
 
 def main(r):
     """ Initialize and recurse through posts. """
@@ -39,7 +25,7 @@ def main(r):
     # Check bot inbox for messages.
     msgs = list(r.inbox.unread(limit=None))
     if len(msgs) > 0 and not cfg.HOSTED:
-        print(str(len(msgs)) + " message(s) in /u/" + cfg.USERNAME + "\'s inbox.")
+        print(str(len(msgs)) +" message(s) in /u/"+ cfg.ZENBOT_USERNAME +"\'s inbox.")
         print("Please read before running bot.")
         if len(msgs) > cfg.MAX_MSGS: exit()
 
@@ -80,4 +66,4 @@ def main(r):
         if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
 
 if __name__ == '__main__':
-    main(r)
+    main(oauth.auth())

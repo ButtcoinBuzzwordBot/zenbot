@@ -13,10 +13,10 @@ MAX_MSGS = 12
 DATABASE = None
 VISITED_STORE = "visited"
 KOAN_STORE = "koans"
-KOAN_ODDS = 10
 HAIKU_STORE = "haiku"
-HAIKU_ODDS = 10
 SNAPPY_STORE = "snappy"
+HAIKU_ODDS = 1000 # (ex: 1 in 1000 chance)
+KOAN_ODDS = 20
 SNAPPY_ODDS = 10
 
 MAX_VISITED = 1000
@@ -29,14 +29,6 @@ STORE_TYPE = "sqlite"
 #MYSQL_USER = "user"
 #MYSQL_PW = "password"
 #MYSQL_HOST = "127.0.0.1"
-
-# Reddit account and API OAuth information. You can hardcode values here but
-# it creates a security risk if your code is public (on Github, etc.)
-# Otherwise, set the environment variables on your host as below.
-ZENBOT_USERNAME = os.environ['ZENBOT_USERNAME']
-ZENBOT_PASSWORD = os.environ['ZENBOT_PASSWORD']
-ZENBOT_ID = os.environ['ZENBOT_ID']
-ZENBOT_SECRET = os.environ['ZENBOT_SECRET']
 
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.
 # Drops quickly as karma increases, can go down to 10 seconds minimum.

@@ -38,12 +38,11 @@ class Comments:
         """ Post replies to random submissions and for triggers. """
 
         self.comment = comment
+        comment.refresh()
         if cfg.DEBUG: print("comment: "+ format(comment))
         elif not cfg.HOSTED: print(".", end="", flush=True)
 
-        comment.refresh()
         replies = comment.replies
-
         for reply in replies:
             subcomment = self.r.comment(reply)
             subcomment.refresh()
