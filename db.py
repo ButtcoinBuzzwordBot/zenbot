@@ -1,9 +1,6 @@
-import os
-import re
-import random
+import os, re
 import sqlite3
 # TODO: import PyMySQL as mysql
-
 import config as cfg
 
 class DB:
@@ -110,7 +107,6 @@ class DB:
     def writeVisited(self) -> None:
         """ Saves list of posts already visited. """
 
-        if cfg.DEBUG: print("Writing visited list to table.")
         length = len(cfg.already_visited)
         if length > cfg.MAX_VISITED:
             cfg.already_visited = cfg.already_visited[length - cfg.MAX_VISITED:length]

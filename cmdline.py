@@ -39,6 +39,6 @@ def processOpts (db, argv) -> None:
     for line in data:
         if cfg.DEBUG: print("Adding: " + line)
         db.executeStmt("INSERT INTO " + table + " VALUES ('" + line + "')")
-    db.dbClose()
+    db.closeDB()
     print("Imported " + str(len(data)) + " lines into " + table)
     exit()

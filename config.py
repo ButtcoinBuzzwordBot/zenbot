@@ -2,7 +2,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.0 (by /u/" + AUTHOR +")"
 #REDDIT = "https://redd.it/"
@@ -15,8 +15,8 @@ VISITED_STORE = "visited"
 KOAN_STORE = "koans"
 HAIKU_STORE = "haiku"
 SNAPPY_STORE = "snappy"
-HAIKU_ODDS = 1000 # (ex: 1 in 1000 chance)
-KOAN_ODDS = 20
+HAIKU_ODDS = 1000000000 # (ex: 1 in 10000000 chance)
+KOAN_ODDS = 1000000000
 SNAPPY_ODDS = 10
 
 MAX_VISITED = 1000
@@ -41,7 +41,7 @@ CMD_HAIKU = TRIGGER + " haiku"
 CMD_SNAPPY = TRIGGER + "snappy"
 
 # Reply for Snapshillbot quote.
-snap_reply = "\n&nbsp;  \n^^by ^The ^Zen ^Master ^/u/Snapshillbot"
+snap_reply = "  \n&nbsp;  \n^^by ^^Zen ^^Master ^^/u/Snapshillbot\n"
 
 # Signature for all replies.
 sig = (

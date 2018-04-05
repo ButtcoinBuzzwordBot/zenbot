@@ -1,17 +1,11 @@
 # I'm the Zen Bot. Bleep bloop!
-# TODO: mysql, memcache, log4 support
+# TODO: mysql, memcache, log support
 # TODO: randomize types of replies
 # TODO: raise/lower frequency based on up/downvotes?
+# FIX: reply to parent? Getting wrong author w/nested replies.
 
-import sys
-import random
-import praw
-
-import db
-import comments
-import config as cfg
-import cmdline
-import oauth
+import sys, traceback, random, time
+import db, comments, config as cfg, cmdline, oauth
 
 def main(r):
     """ Initialize and recurse through posts. """

@@ -1,6 +1,5 @@
 import time
 import praw
-
 import config as cfg
 
 class Comments:
@@ -56,5 +55,4 @@ class Comments:
         elif (cfg.CMD_HAIKU in comment.body):
             self.postReply(self.db.readRandom(cfg.HAIKU_STORE))
         elif (cfg.CMD_SNAPPY in comment.body):
-            i = random.randrange(0, len(cfg.snappy_quotes) -1)
-            self.postReply(cfg.snap_reply +"\""+ cfg.snappy_quotes[i]+ "\"")
+            self.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
