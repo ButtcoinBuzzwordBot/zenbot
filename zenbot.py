@@ -23,8 +23,8 @@ def main(r):
         print("Please read before running bot.")
         if len(msgs) > cfg.MAX_MSGS: exit()
 
-    try:
-        while True:
+    while True:
+        try:
             sub = r.subreddit(cfg.SUBREDDIT).new(limit=40)
             for submission in sub:
                 post = r.submission(submission)
@@ -33,8 +33,8 @@ def main(r):
                 if cfg.DEBUG: print("submission: " + format(post.id))
                 # TODO: Figure out how to randomize order for variety.
                 # TODO: Put Snappy quotes in DB to pull random.
-                if not c.alreadyVisited(post.id):
-                    cfg.already_visited.append(str(post.id))
+                if not c.alreadyVisited(post):
+                    c.markVisited(post)
                     if random.randrange(0, cfg.HAIKU_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
                     elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
@@ -42,7 +42,6 @@ def main(r):
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
 
-                dbase.writeVisited()
                 for comment in post.comments:
                     c.checkComment(comment)
 
@@ -51,12 +50,12 @@ def main(r):
                 break
             else: time.sleep(60 * 10)
 
-        dbase.closeDB()
+        except:
+            if cfg.DEBUG: traceback.print_exc()
+            time.sleep(30)
+            if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
 
-    except:
-        if cfg.DEBUG: traceback.print_exc()
-        time.sleep(30)
-        if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
+    dbase.closeDB()
 
 if __name__ == '__main__':
     main(oauth.auth())

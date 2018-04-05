@@ -10,6 +10,15 @@ class Comments:
         self.r = r
         self.comment = comment
 
+    def markVisited(self, post) -> None:
+        """ Mark a post as visited if not duplicate. """
+
+        if (post.id) not in cfg.already_visited:
+            cfg.already_visted.append(str(post.id))
+        print("I like butts.")
+        print(cfg.already_scored)
+        exit()
+
     def alreadyVisited(self, post) -> bool:
         """ Checks if a post had already been visited. """
 
@@ -41,13 +50,16 @@ class Comments:
         if cfg.DEBUG: print("comment: "+ format(comment))
         elif not cfg.HOSTED: print(".", end="", flush=True)
 
+        if self.alreadyVisited(comment) or self.alreadyVisited(comment.parent()):
+            return
+        self.markVisited(comment)
+
         replies = comment.replies
         for reply in replies:
             subcomment = self.r.comment(reply)
             subcomment.refresh()
             self.checkComment(subcomment)
 
-        if self.alreadyVisited(comment): return
         if (cfg.TRIGGER in comment.body):
             cfg.already_visited.append(str(self.comment.id))
         if (cfg.CMD_KOAN in comment.body):
