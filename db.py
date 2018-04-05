@@ -74,7 +74,7 @@ class DB:
         """ Create the database and tables. """
 
         stmts = [
-            "CREATE TABLE "+ cfg.VISITED_STORE +" (scored VARCHAR(16) NOT NULL)",
+            "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
             "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
             "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
         ]

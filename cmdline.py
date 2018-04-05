@@ -28,7 +28,7 @@ def processOpts (db, argv) -> None:
         name = os.path.basename(__file__)
         print("Usage: " + name + " [", end="")
         print("|".join(usage) + "]")
-        print("    where <file> = words|phrases|scored|highscores|koans|haiku")
+        print("    where <file> = koans|haiku")
         exit(2)
 
     table = argv[2]

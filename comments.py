@@ -14,10 +14,7 @@ class Comments:
         """ Mark a post as visited if not duplicate. """
 
         if (post.id) not in cfg.already_visited:
-            cfg.already_visted.append(str(post.id))
-        print("I like butts.")
-        print(cfg.already_scored)
-        exit()
+            cfg.already_visited.append(str(post.id))
 
     def alreadyVisited(self, post) -> bool:
         """ Checks if a post had already been visited. """
