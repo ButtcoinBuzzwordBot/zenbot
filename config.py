@@ -2,7 +2,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots.
 
-DEBUG = True
+DEBUG = False
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.0 (by /u/" + AUTHOR +")"
 #REDDIT = "https://redd.it/"
