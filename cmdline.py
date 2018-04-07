@@ -9,7 +9,7 @@ def processOpts (db, argv) -> None:
     """ Check optional arguments to import text files into database. """
 
     OPTIONS = [
-        ["import", "file"],
+        ["import", "file"]
     ]
 
     opts, usage = [],[]

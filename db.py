@@ -31,9 +31,6 @@ class DB:
 
         cfg.already_visited = self.readVisited()
 
-    def setType(self, dbtype):
-        self.dbtype = dbtype
-
     def executeStmt(self, stmt) -> None:
         """ Executes an atomic database operation. """
         

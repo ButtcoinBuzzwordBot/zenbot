@@ -1,8 +1,7 @@
 # I'm the Zen Bot. Bleep bloop!
 # TODO: mysql, memcache, log support
-# TODO: randomize types of replies
-# TODO: raise/lower frequency based on up/downvotes?
 # FIX: reply to parent? Getting wrong author w/nested replies.
+# FIX: trigger in nested comments not working again
 
 import sys, traceback, random, time
 import db, comments, config as cfg, cmdline, oauth
@@ -25,12 +24,17 @@ def main(r):
 
     while True:
         try:
-            sub = r.subreddit(cfg.SUBREDDIT).new(limit=40)
+            sub = r.subreddit(cfg.SUBREDDIT).new(limit=50)
             for submission in sub:
                 post = r.submission(submission)
                 c = comments.Comments(dbase, r, post)
 
+                # VERY IMPORTANT: since the bot marks posts visited, the submission
+                # (top) must be processed last, so traverse comment trees depth-first.
                 if cfg.DEBUG: print("submission: " + format(post.id))
+                for comment in post.comments:
+                    c.checkComment(comment)
+
                 # TODO: Figure out how to randomize order for variety.
                 # TODO: Put Snappy quotes in DB to pull random.
                 if not c.alreadyVisited(post):
@@ -41,9 +45,6 @@ def main(r):
                         c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
-
-                for comment in post.comments:
-                    c.checkComment(comment)
 
             if not cfg.HOSTED:
                 print("\nBleep! All done.")
