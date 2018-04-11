@@ -10,7 +10,7 @@ class DB:
         dbexists = True
         
         if dbtype is "sqlite":
-            cfg.DATABASE = "zenbot.db"
+            cfg.DATABASE += ".db"
             if not os.path.isfile(cfg.DATABASE):
                 dbexists = False
             try:
@@ -21,7 +21,6 @@ class DB:
                 exit()
 
         elif dbtype is "mysql":
-            cfg.DATABASE = "zenbot"
             try:
                 self.store = mysql.connect(host=cfg.MYSQL_HOST,
                                            user=cfg.MYSQL_USER,
@@ -89,7 +88,6 @@ class DB:
             return
         finally:
             cur.close()
-        
 
     def dropTable(self, table) -> None:
         """ Drops a table whether or not it exists. """

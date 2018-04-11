@@ -1,8 +1,7 @@
 # Bleep bloop! I am a Zen Bot. Om.
-# TODO: mysql, memcache
+# TODO: Store Type: memcache
 # TODO: post reply to parent? complicated re: praw models.
 # FIX: never reply to self
-# FIX: Snappy posts going to comments not submission
 
 import sys, traceback, random, time
 import config as cfg, db, comments, cmdline, oauth

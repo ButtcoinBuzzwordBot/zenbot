@@ -1,7 +1,5 @@
 import os, getopt
 import sqlite3
-#import PyMySQL
-
 import config as cfg, rants
 
 def printUsage(usage):
@@ -10,14 +8,14 @@ def printUsage(usage):
     name = os.path.basename(__file__)
     print("Usage: " + name + " [", end="")
     print("|".join(usage) + "]")
-    print("    where <file> = koans|haiku|rants|replies")
+    print("    where <file> = koans|haiku|replies")
     exit(2)
         
 def processOpts (db, argv) -> None:
     """ Check optional arguments to import text files into database. """
 
     OPTIONS = [["import", "file"]]
-    ARGS = ["koans", "haiku", "rants", "replies"]
+    ARGS = ["koans", "haiku", "replies"]
         
     opts, usage = [],[]
     for opt,arg in OPTIONS:

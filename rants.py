@@ -47,7 +47,5 @@ class Rants:
                 val = self.getTerm(key)
             template = template.replace("["+ key +"]", val, 1)
             
-        if cfg.DEBUG:
-            print(template)
-            exit()
+        if cfg.DEBUG: print(template)
         return(template)
