@@ -1,30 +1,40 @@
 # I'm the Zen Bot. Bleep bloop!
 # TODO: mysql, memcache, log support
-# FIX: reply to parent? Getting wrong author w/nested replies.
-# FIX: trigger in nested comments not working again
+# TODO: post reply to parent? complicated re: praw models.
+# FIX: never reply to self
+# FIX: Snappy posts going to comments not submission
 
 import sys, traceback, random, time
-import db, comments, config as cfg, cmdline, oauth
+import config as cfg, db, comments, cmdline, oauth
+
+def checkInbox(r, dbase):
+    """ Check inbox and reply randomly to new messages from regular users. """
+
+    IGNORE = [cfg.ZENBOT_USERNAME, "reddit"] # TODO: cfg.AUTHOR
+    msgs = list(r.inbox.unread(limit=None))
+
+    if len(msgs) > 0 and not cfg.HOSTED:
+        print(str(len(msgs)) +" message(s) in /u/"+ cfg.ZENBOT_USERNAME +"\'s inbox.")
+
+    for msg in msgs:
+        msg.mark_read()
+        if msg.author not in IGNORE:
+            reply = "*bleep bloop* "+ dbase.readRandom(cfg.REPLY_STORE) +" *beep*"
+            msg.reply(reply)
 
 def main(r):
     """ Initialize and recurse through posts. """
 
     dbase = db.DB(cfg.STORE_TYPE)
-    cfg.snappy_quotes = dbase.readSnappy(r)
-
     if len(sys.argv) > 1:
         cmdline.processOpts(dbase, sys.argv)
 
-    # Check bot inbox for messages.
-    msgs = list(r.inbox.unread(limit=None))
-    if len(msgs) > 0 and not cfg.HOSTED:
-        print(str(len(msgs)) +" message(s) in /u/"+ cfg.ZENBOT_USERNAME +"\'s inbox.")
-        print("Please read before running bot.")
-        if len(msgs) > cfg.MAX_MSGS: exit()
+    checkInbox(r, dbase)
+    cfg.snappy_quotes = dbase.readSnappy(r)
 
     while True:
         try:
-            sub = r.subreddit(cfg.SUBREDDIT).new(limit=50)
+            sub = r.subreddit(cfg.SUBREDDIT).new(limit=40)
             for submission in sub:
                 post = r.submission(submission)
                 c = comments.Comments(dbase, r, post)
@@ -35,8 +45,8 @@ def main(r):
                 for comment in post.comments:
                     c.checkComment(comment)
 
-                # TODO: Figure out how to randomize order for variety.
-                # TODO: Put Snappy quotes in DB to pull random.
+                # TODO: differentiate post vs. comment in class?
+                c.comment = post
                 if not c.alreadyVisited(post):
                     c.markVisited(post)
                     if random.randrange(0, cfg.HAIKU_ODDS) < 1:

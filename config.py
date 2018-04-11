@@ -5,8 +5,8 @@ import os
 DEBUG = False
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.0 (by /u/" + AUTHOR +")"
-#REDDIT = "https://redd.it/"
 SUBREDDIT = "buttcoin"
+ENCODING = "utf-8"
 # Max. new messages in bot inbox before script quits.
 MAX_MSGS = 12
 
@@ -14,7 +14,9 @@ DATABASE = None
 VISITED_STORE = "visited"
 KOAN_STORE = "koans"
 HAIKU_STORE = "haiku"
-SNAPPY_STORE = "snappy"
+#SNAPPY_STORE = "snappy"
+RANT_STORE = "rants"
+REPLY_STORE = "replies"
 HAIKU_ODDS = 1000000000 # (ex: 1 in 10000000 chance)
 KOAN_ODDS = 1000000000
 SNAPPY_ODDS = 11
@@ -32,13 +34,14 @@ STORE_TYPE = "sqlite"
 
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.
 # Drops quickly as karma increases, can go down to 10 seconds minimum.
-RATELIMIT = 20
+RATELIMIT = 10
 
 # Triggers which active the bot to reply to a comment.
 TRIGGER = "!ZenBot"
 CMD_KOAN = TRIGGER + " koan"
 CMD_HAIKU = TRIGGER + " haiku"
-CMD_SNAPPY = TRIGGER + "snappy"
+CMD_SNAPPY = TRIGGER + " snappy"
+CMD_RANT = TRIGGER + " rant"
 
 # Reply for Snapshillbot quote.
 snap_reply = "  \n&nbsp;  \n^^by ^^Zen ^^Master ^^/u/Snapshillbot\n"

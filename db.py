@@ -61,6 +61,29 @@ class DB:
             exit()
             #raise Exception(SQLExecuteError "Execute error")
 
+    def deleteTable(self, table) -> None:
+        """ Deletes all entries from a table. """
+
+        try:
+            cur = self.store.cursor()
+            cur.execute("DELETE FROM "+ table)
+        except:
+            return
+        finally:
+            cur.close()
+        
+
+    def dropTable(self, table) -> None:
+        """ Drops a table whether or not it exists. """
+
+        try:
+            cur = self.store.cursor()
+            cur.execute("DROP TABLE "+ table)
+        except:
+            return
+        finally:
+            cur.close()
+
     def closeDB(self) -> None:
         """ Commits and closes database. """
 
@@ -74,6 +97,8 @@ class DB:
             "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
             "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
             "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
+            "CREATE TABLE "+ cfg.RANT_STORE +" (rants TEXT NOT NULL)",
+            "CREATE TABLE "+ cfg.REPLY_STORE +" (replies TEXT NOT NULL)"
         ]
 
         for stmt in stmts:
