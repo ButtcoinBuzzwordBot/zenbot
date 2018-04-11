@@ -10,7 +10,7 @@ class Rants:
     def getTerm(self, table):
         """ Pulls a random term for a placeholder. """
 
-        [term] = self.db.fetchStmt("* FROM "+ table +" ORDER BY RANDOM() LIMIT 1")
+        [term] = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 1")
         return(str(term.replace("''", "'")))
 
     def importData(self, fname):
@@ -20,7 +20,7 @@ class Rants:
         with open(fname + ".txt", "r", encoding="utf-8") as f:
             for line in f:
                 regex = re.compile("\[(\w+)\]")
-                table = regex.match(line).group(1)
+                table = "lex_" + regex.match(line).group(1)
                 self.db.dropTable(table)
                 stmt = "CREATE TABLE "+ table +" (phrases varchar(255) NOT NULL)"
                 self.db.executeStmt(stmt)

@@ -1,5 +1,5 @@
-# I'm the Zen Bot. Bleep bloop!
-# TODO: mysql, memcache, log support
+# Bleep bloop! I am a Zen Bot. Om.
+# TODO: mysql, memcache
 # TODO: post reply to parent? complicated re: praw models.
 # FIX: never reply to self
 # FIX: Snappy posts going to comments not submission
@@ -55,6 +55,8 @@ def main(r):
                         c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
+
+                dbase.writeVisited()
 
             if not cfg.HOSTED:
                 print("\nBleep! All done.")

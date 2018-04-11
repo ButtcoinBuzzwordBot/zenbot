@@ -1,6 +1,5 @@
 import os, re
-import sqlite3
-# TODO: import PyMySQL as mysql
+import sqlite3, pymysql as mysql
 import config as cfg
 
 class DB:
@@ -20,13 +19,34 @@ class DB:
                 print(err)
                 print("ERROR: Cannot create or connect to "+ cfg.DATABASE)
                 exit()
+
+        elif dbtype is "mysql":
+            cfg.DATABASE = "zenbot"
+            try:
+                self.store = mysql.connect(host=cfg.MYSQL_HOST,
+                                           user=cfg.MYSQL_USER,
+                                           password=cfg.MYSQL_PW,
+                                           db=cfg.DATABASE,
+                                           charset='utf8')
+            except mysql.Error as err:
+                print(err)
+                print("ERROR: Cannot create or connect to "+ cfg.DATABASE)
+                exit()
+
+            cur = self.store.cursor()
+            cur.execute("SHOW TABLES LIKE '"+ cfg.VISITED_STORE +"'")
+            result = cur.fetchone()
+            if result is None:
+                dbexists = False
+            cur.close()
+
         else:
             print("Database type "+ dbtype +" not supported.")
             exit()
 
         if not dbexists:
             self.createDB()
-            print("Database created. Please import koans/haiku before running.")
+            print("Database created. Please import all tables before running.")
             exit()
 
         cfg.already_visited = self.readVisited()
@@ -37,13 +57,12 @@ class DB:
         try:
             cur = self.store.cursor()
             cur.execute(stmt)
-        except sqlite3.Error as err:
-            # TODO: except (sqlite3.Error, mysql.connector.Error) as err:
+        except (sqlite3.Error, mysql.Error) as err:
             print(err)
             print("ERROR: Cannot execute " + stmt)
             exit()
-            #raise Exception(SQLExecuteError ("Execute error"))
-        cur.close()
+        finally:
+            cur.close()
 
     def fetchStmt(self, stmt) -> list:
         """ Executes a SELECT statement and returns fetched results. """
@@ -52,14 +71,13 @@ class DB:
             cur = self.store.cursor()
             cur.execute("SELECT "+ stmt)
             data = cur.fetchall()
-            cur.close()
-            return(data)
         except sqlite3.Error as err:
-            # TODO: except (sqlite3.Error, mysql.connector.Error) as err:
             print(err)
             print("ERROR: Cannot execute SELECT " + stmt)
             exit()
-            #raise Exception(SQLExecuteError "Execute error")
+        finally:
+            cur.close()
+        return(data)
 
     def deleteTable(self, table) -> None:
         """ Deletes all entries from a table. """
@@ -97,7 +115,6 @@ class DB:
             "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
             "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
             "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
-            "CREATE TABLE "+ cfg.RANT_STORE +" (rants TEXT NOT NULL)",
             "CREATE TABLE "+ cfg.REPLY_STORE +" (replies TEXT NOT NULL)"
         ]
 
@@ -109,20 +126,20 @@ class DB:
         """ Gets a random row from a table. """
 
         self.store.row_factory = None
-        if self.dbtype is "sqlite":
-            data = self.fetchStmt("* FROM "+ name +" ORDER BY RANDOM() LIMIT 1")
-            if data is None:
-                print("ERROR: Please import " + name + " into database.")
-                exit()
-            return(data[0][0].replace("''", "'"))
+        if self.dbtype is "sqlite": rand = "RANDOM()"
+        else: rand = "RAND()"
+        data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 1")
+        if data is None:
+            print("ERROR: Please import " + name + " into database.")
+            exit()
+        return(data[0][0].replace("''", "'"))
 
     def readVisited(self) -> list:
         """ Gets list of posts already visited. """
 
         self.store.row_factory = lambda cursor, row: row[0]
-        if self.dbtype is "sqlite":
-            visited = self.fetchStmt("* FROM "+ cfg.VISITED_STORE)
-        if visited is None:
+        visited = self.fetchStmt("* FROM "+ cfg.VISITED_STORE)
+        if len(visited) == 0:
             return([])
         return(visited)
 
@@ -133,11 +150,10 @@ class DB:
         if length > cfg.MAX_VISITED:
             cfg.already_visited = cfg.already_visited[length - cfg.MAX_VISITED:length]
 
-        if self.dbtype is "sqlite":
-            self.executeStmt("DELETE FROM "+ cfg.VISITED_STORE)
-            for visited in cfg.already_visited:
-                stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
-                self.executeStmt(stmt)
+        self.executeStmt("DELETE FROM "+ cfg.VISITED_STORE)
+        for visited in cfg.already_visited:
+            stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
+            self.executeStmt(stmt)
         self.store.commit()
 
     def readSnappy(self, r) -> list:

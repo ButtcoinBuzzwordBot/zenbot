@@ -1,36 +1,39 @@
+# Zen Bot configuration file.
+
 import os
 
 # When DEBUG is True the bot uses /r/testingground4bots.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
-BOTNAME = "python:zenmaster.bot:v1.0 (by /u/" + AUTHOR +")"
+BOTNAME = "python:zenmaster.bot:v1.1 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
-ENCODING = "utf-8"
-# Max. new messages in bot inbox before script quits.
-MAX_MSGS = 12
 
 DATABASE = None
 VISITED_STORE = "visited"
+
 KOAN_STORE = "koans"
+KOAN_ODDS = 1000000000 # (ex: 1 in 10000000 chance)
 HAIKU_STORE = "haiku"
+HAIKU_ODDS = 1000000000
 #SNAPPY_STORE = "snappy"
+SNAPPY_ODDS = 11
 RANT_STORE = "rants"
 REPLY_STORE = "replies"
-HAIKU_ODDS = 1000000000 # (ex: 1 in 10000000 chance)
-KOAN_ODDS = 1000000000
-SNAPPY_ODDS = 11
+REPLY_ODDS = 30
 
 MAX_VISITED = 1000
 
 # If HOSTED is True the script continues looping. Set appropriate storage type and
-# info based on your hosting options.
+# info based on your hosting options. Both SQLite and MySQL default to UTF-8 for
+# text but if not you can set a default encoding for input files below.
 HOSTED = False
-STORE_TYPE = "sqlite"
-#STORE_TYPE = "mysql"
-#MYSQL_USER = "user"
-#MYSQL_PW = "password"
-#MYSQL_HOST = "127.0.0.1"
+ENCODING = "utf-8"
+#STORE_TYPE = "sqlite"
+STORE_TYPE = "mysql"
+MYSQL_USER = "zenbot"
+MYSQL_PW = os.environ['MYSQL_PW']
+MYSQL_HOST = "127.0.0.1"
 
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.
 # Drops quickly as karma increases, can go down to 10 seconds minimum.
