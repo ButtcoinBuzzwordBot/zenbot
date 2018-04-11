@@ -78,6 +78,20 @@ class DB:
             cur.close()
         return(data)
 
+    def checkTable(self, table) -> int:
+        """ Checks to see if a table exists. """
+
+        try:
+            cur = self.store.cursor()
+            cur.execute("SELECT COUNT(*) FROM "+ table)
+            [count] = cur.fetchall()
+        except sqlite3.Error as err:
+            print(err)
+            return(0)
+        finally:
+            cur.close()
+        return(count)
+        
     def deleteTable(self, table) -> None:
         """ Deletes all entries from a table. """
 
@@ -119,6 +133,16 @@ class DB:
         for stmt in stmts:
             self.executeStmt(stmt)
         self.store.commit()
+
+    def checkDB(self) -> None:
+        """ Checks that the required tables are populated. """
+
+        tables = [cfg.KOAN_STORE, cfg.HAIKU_STORE, "lex_insult"]
+        for table in tables:
+            result = self.checkTable(table)
+            if int(result) < 1:
+                print("ERROR: Need to import "+ table +" before running.")
+                exit()
 
     def readRandom(self, name) -> str:
         """ Gets a random row from a table. """

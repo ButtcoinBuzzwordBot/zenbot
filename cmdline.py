@@ -8,14 +8,14 @@ def printUsage(usage):
     name = os.path.basename(__file__)
     print("Usage: " + name + " [", end="")
     print("|".join(usage) + "]")
-    print("    where <file> = koans|haiku|replies")
+    print("    where <file> = koans|haiku|rants|replies")
     exit(2)
         
 def processOpts (db, argv) -> None:
     """ Check optional arguments to import text files into database. """
 
     OPTIONS = [["import", "file"]]
-    ARGS = ["koans", "haiku", "replies"]
+    ARGS = ["koans", "haiku", "rants", "replies"]
         
     opts, usage = [],[]
     for opt,arg in OPTIONS:

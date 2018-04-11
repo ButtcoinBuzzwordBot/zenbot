@@ -1,5 +1,5 @@
 # Bleep bloop! I am a Zen Bot. Om.
-# TODO: Store Type: memcache
+# TODO: Add memcache/logging
 # TODO: post reply to parent? complicated re: praw models.
 # FIX: never reply to self
 
@@ -27,13 +27,13 @@ def main(r):
     dbase = db.DB(cfg.STORE_TYPE)
     if len(sys.argv) > 1:
         cmdline.processOpts(dbase, sys.argv)
-
+    dbase.checkDB()
     checkInbox(r, dbase)
     cfg.snappy_quotes = dbase.readSnappy(r)
 
     while True:
         try:
-            sub = r.subreddit(cfg.SUBREDDIT).new(limit=40)
+            sub = r.subreddit(cfg.SUBREDDIT).new(limit=cfg.SUBLIMIT)
             for submission in sub:
                 post = r.submission(submission)
                 c = comments.Comments(dbase, r, post)
@@ -60,11 +60,11 @@ def main(r):
             if not cfg.HOSTED:
                 print("\nBleep! All done.")
                 break
-            else: time.sleep(60 * 10)
+            else: time.sleep(cfg.SLEEP_LOOP)
 
         except:
             if cfg.DEBUG: traceback.print_exc()
-            time.sleep(30)
+            time.sleep(cfg.SLEEP_TIMEOUT)
             if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
 
     dbase.closeDB()

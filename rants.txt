@@ -854,6 +854,7 @@ an empty Starbucks card
 
 [award]
 Nobel
+Loebner
 Oscar
 Mr. Universe
 Playgirl Model of the Year

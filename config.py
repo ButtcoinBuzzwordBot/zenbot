@@ -15,7 +15,7 @@ SUBREDDIT = "buttcoin"
 # preferred as database needs are minimal and it's fast and lightweight compared to
 # others.
 
-HOSTED = False
+HOSTED = True
 ENCODING = "utf-8"
 STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
@@ -26,21 +26,24 @@ DATABASE = "zenbot"
 
 # Example: odds set at 1000 are approx. 1-in-1000 chance to post.
 KOAN_STORE = "koans"
-KOAN_ODDS = 30
+KOAN_ODDS = 20
 HAIKU_STORE = "haiku"
-HAIKU_ODDS = 20
+HAIKU_ODDS = 10
 SNAPPY_STORE = "snappy"
 SNAPPY_ODDS = 999999999999
 RANT_STORE = "rants"
 REPLY_STORE = "replies"
-REPLY_ODDS = 40
+REPLY_ODDS = 30
 
 VISITED_STORE = "visited"
-MAX_VISITED = 1000
+MAX_VISITED = 5000
 
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.
 # Drops quickly as karma increases, can go down to 10 seconds minimum.
 RATELIMIT = 10
+SUBLIMIT = 25
+SLEEP_LOOP = 10 * 60
+SLEEP_TIMEOUT = 30
 
 # Triggers which active the bot to reply to a comment.
 TRIGGER = "!ZenBot"
