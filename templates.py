@@ -1,19 +1,23 @@
 """
-    [["insult", "namecall", "coin", "substance"],
-     ["[insult]. Only [namecall] trade away [coin]. Anybody who is seriously "+
-      "interested in [substance] knows that [doingthing] is quite simple. I "+
-      "won't go into the details here as it is quite easy to google how to secure Bitcoin but suffice to say... you shouldn't keep your Bitcoin exposed to a computer at all. Buy it, transfer it onto a paper wallet as [adjective] fast, and then keep that wallet secure.
-
-If you sell your Bitcoin or somebody with stronger hands comes in and transfers it away without your consent, you are a weak hand that deserves all the pain and derision coming your way.
-"""
-
-"""
     [["t"],
      ["It’s all based on strong fundamentals. There was at one point a fraudulent report indicating that spring frosts in Distubuted States of Ledgeria have severally impacted Cointree blooms, however it looks it was not the case and we are looking at normal-to-above normal cryptoharvest."+
       "  \n&nbsp;  \n^^inspired ^^by ^^/u/siconik"]],
 """
 templates = [
     
+    [["insult", "namecall", "coin", "substance", "award", "coin", "wallet", 
+      "namecall", "coin", "wallet", "adjective", "secure", "coin", "alpha",
+      "namecall", "penalty"],
+     ["[insult]. Only [namecall] trades away [coin]. Anybody who is seriously "+
+      "interested in [substance] knows that [doingthing] is quite simple. It "+
+      "doesn't take a(n) [award] winner to google how to secure [coin] with "+
+      "[wallet] but suffice to say only a [namecall] keeps [coin] on a "+
+      "computer. Buy it, transfer it to [wallet] as [adjective] fast as "+
+      "possible, and then [secure].\n\n If you sell your [coin] or [alpha] "+
+      "comes in and transfers it without consent, you are a [namecall] that "+
+      "deserves [penalty] coming your way."]],
+]
+"""
     [["namecall", "pastaction", "authorities", "threat", "penalty", "crazies",
       "avoid", "dude", "criminal", "meeting", "screw", "dude", "int", "timespan",
       "authorities", "dude", "authorities", "insult", "complaint", "reward"],
@@ -40,7 +44,7 @@ templates = [
       "goodthing", "effect", "namecall", "react", "int", "timespan", "coin"],
 
      ["[insult], you [recipient]. I've reported [comment] to the [mods]. "+
-      "[opening] [thing], and it [badthing]. [rejoin], it [badthing]. "+
+      "[opening] [thing] or you'd know it [badthing]. [rejoin], it [badthing]. "+
       "[coin] is the only crypto that will [future].\n\nThis is a classic "+
       "[name]-[name] [effect] for [coin]. When [pastaction] on a "+
       "[int] [timespan] [operator] chart, it becomes a [goodthing].\n\n"+
@@ -80,3 +84,4 @@ templates = [
       "may [blessing]."+
       "  \n&nbsp;  \n^^overheard ^^by ^^/u/ZenMasterBot"]]
 ]
+"""

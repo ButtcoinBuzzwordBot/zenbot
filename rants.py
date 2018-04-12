@@ -11,7 +11,7 @@ class Rants:
         """ Pulls a random term for a placeholder. """
 
         [term] = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 1")
-        return(str(term.replace("''", "'")))
+        return(str(term).replace("''", "'"))
 
     def importData(self, fname):
         """ Parses a text file with entries for multiple tables. """

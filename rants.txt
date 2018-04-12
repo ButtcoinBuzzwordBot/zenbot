@@ -472,6 +472,25 @@ Bitcoin Original
 Tether
 Dietbitcoin
 
+[wallet]
+a paper wallet
+a Nano Ledger
+a hardware wallet
+Mew
+MetaMask
+Electrum
+a CD-R
+a box and a tube of epoxy
+a hole under your birdbath
+a fingerprint and voice sensor 2fa safe
+
+[secure]
+hide it under your birdbath
+cover it in epoxy
+stick it in a safe-deposit box
+put it under your matress
+memorize it all and destroy it
+
 [future]
 rocket to the moon
 go to Jupiter and beyond
@@ -556,7 +575,7 @@ huge bear retreat
 massive influx of new investments
 guaranteed 10x return on investment
 sharp price movement
-sharp price increate
+sharp price increase
 sudden and massive upswing
 sentiment that turns more bullish
 clear case where optimal exit points become apparant
@@ -590,9 +609,15 @@ scammed
 leveraged
 punctuated
 
+[alpha]
+somebody with stronger hands
+a Big Swinging Dick
+a Captain of Industry
+serial entrepeneur
+strong hand
+
 [authorities]
 The Man
-Captains of Indutry
 bankers on Wall St.
 Federal gov''t
 statist governments
@@ -617,14 +642,15 @@ force him to eat his own testicles
 bash his head in
 
 [penalty]
-force him into paying tax-theft on his bitcoin gainz
-make him pay taxes for his creepto trades
-give up his private keys
-hand over his Nano Ledger
-forfeit his massive bitcoin earnings
-give up his god-given freedumbz
-admit he wears women''s panties under his clothes
-admit he picks his nose and eats it
+all the pain and derision
+being forced into paying tax-theft on bitcoin gainz
+make to pay taxes for creepto trades
+loss of his private keys
+seizure of his Nano Ledger
+forfeiture of massive bitcoin earnings
+loss of god-given freedumbz
+having to admit to wearing women''s panties under his clothes
+getting caught picking his nose and eating it
 
 [avoid]
 get out of owing them money
@@ -732,6 +758,7 @@ year
 decade
 
 [namecall]
+weak hand
 chicken fucker
 cow tipper
 knuckle dragger

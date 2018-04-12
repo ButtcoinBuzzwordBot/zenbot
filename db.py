@@ -1,7 +1,7 @@
 import os, re
-#import sqlite3
+import sqlite3
 #import pymysql as mysql
-import python3-memcached as memcache
+#import memcache
 import config as cfg
 
 class DB:
@@ -43,7 +43,7 @@ class DB:
 
         elif dbtype is "memcache":
             try:
-                self.store = memcache.Client(['127.0.0.1:11211'], debug=0)
+                self.store = memcache.Client(['127.0.0.1:11211'], debug=1)
             except memcache.Error as err:
                 print(err)
                 print("ERROR: Unable to initialize memcache.")
@@ -162,15 +162,15 @@ class DB:
         """ Checks that the required tables are populated. """
 
         keys = [cfg.KOAN_STORE, cfg.HAIKU_STORE, cfg.REPLY_STORE, cfg.RANT_TABLE]
-        for table in keys:
+        for key in keys:
             if self.dbtype is "memcache":
-                if self.store.get(table) is None:
-                    print("ERROR: Need to load "+ table +"data before running.")
+                if self.store.get(key) is None:
+                    print("ERROR: Need to load "+ table +" data before running.")
                     exit()
             else:
-                result = self.checkTable(table)
+                result = self.checkTable(key)
                 if int(result) < 1:
-                    print("ERROR: Need to import "+ table +" before running.")
+                    print("ERROR: Need to import "+ key +" before running.")
                     exit()
 
     def readRandom(self, name) -> str:

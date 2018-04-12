@@ -1,4 +1,10 @@
 # Zen Bot configuration file. Bleep bloop.
+#
+# TODO v1.2: Add Couchbase memcache/error logging for remote hosting.
+# TODO: post reply to parent although complicated re: praw models.
+# TODO: rewrite template system to find replace vars.
+# FIX: never reply to self.
+# FIX: don't allow random replies to same thread as where invoked.
 
 import os
 
@@ -17,8 +23,8 @@ SUBREDDIT = "buttcoin"
 
 HOSTED = False
 ENCODING = "utf-8"
-STORE_TYPE = "memcache"
-#STORE_TYPE = "sqlite"
+#STORE_TYPE = "memcache"
+STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
 #MYSQL_USER = "zenbot"
 #MYSQL_PW = os.environ['MYSQL_PW']
@@ -27,9 +33,9 @@ DATABASE = "zenbot"
 
 # Example: odds set at 1000 are approx. 1-in-1000 chance to post.
 KOAN_STORE = "koans"
-KOAN_ODDS = 20
+KOAN_ODDS = 15
 HAIKU_STORE = "haiku"
-HAIKU_ODDS = 10
+HAIKU_ODDS = 15
 SNAPPY_STORE = "snappy"
 SNAPPY_ODDS = 999999999999
 RANT_STORE = "rants"
@@ -38,6 +44,7 @@ REPLY_STORE = "replies"
 REPLY_ODDS = 30
 
 VISITED_STORE = "visited"
+if DEBUG: VISITED_STORE += "_debug"
 MAX_VISITED = 5000
 
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.

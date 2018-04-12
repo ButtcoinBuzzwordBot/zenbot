@@ -1,7 +1,4 @@
 # Bleep bloop! I am a Zen Bot. Om.
-# TODO: Add memcache/logging
-# TODO: post reply to parent? complicated re: praw models.
-# FIX: never reply to self
 
 import sys, traceback, random, time
 import config as cfg, db, comments, cmdline, oauth
