@@ -1,5 +1,7 @@
 import os, re
-import sqlite3, pymysql as mysql
+#import sqlite3
+#import pymysql as mysql
+import python3-memcached as memcache
 import config as cfg
 
 class DB:
@@ -38,6 +40,15 @@ class DB:
             if result is None:
                 dbexists = False
             cur.close()
+
+        elif dbtype is "memcache":
+            try:
+                self.store = memcache.Client(['127.0.0.1:11211'], debug=0)
+            except memcache.Error as err:
+                print(err)
+                print("ERROR: Unable to initialize memcache.")
+                exit()
+            self.createDB()
 
         else:
             print("Database type "+ dbtype +" not supported.")
@@ -123,47 +134,70 @@ class DB:
     def createDB(self) -> None:
         """ Create the database and tables. """
 
-        stmts = [
-            "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
-            "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
-            "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
-            "CREATE TABLE "+ cfg.REPLY_STORE +" (replies TEXT NOT NULL)"
-        ]
+        if self.dbtype is "memcache":
+            keys = [cfg.KOAN_STORE, cfg.HAIKU_STORE, cfg.REPLY_STORE]
+            for key in keys:
+                try:
+                    dataf = open(key + ".txt", "r", encoding=cfg.ENCODING)
+                except:
+                    print("ERROR: Data file "+ key +".txt does not exist.")
+                    exit()
+                data = dataf.read().split("|")
+                dataf.close()
+                self.store.set(key, data)
 
-        for stmt in stmts:
-            self.executeStmt(stmt)
-        self.store.commit()
+        else:
+            stmts = [
+                "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
+                "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
+                "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
+                "CREATE TABLE "+ cfg.REPLY_STORE +" (replies TEXT NOT NULL)"
+            ]
+
+            for stmt in stmts:
+                self.executeStmt(stmt)
+            self.store.commit()
 
     def checkDB(self) -> None:
         """ Checks that the required tables are populated. """
 
-        tables = [cfg.KOAN_STORE, cfg.HAIKU_STORE, "lex_insult"]
-        for table in tables:
-            result = self.checkTable(table)
-            if int(result) < 1:
-                print("ERROR: Need to import "+ table +" before running.")
-                exit()
+        keys = [cfg.KOAN_STORE, cfg.HAIKU_STORE, cfg.REPLY_STORE, cfg.RANT_TABLE]
+        for table in keys:
+            if self.dbtype is "memcache":
+                if self.store.get(table) is None:
+                    print("ERROR: Need to load "+ table +"data before running.")
+                    exit()
+            else:
+                result = self.checkTable(table)
+                if int(result) < 1:
+                    print("ERROR: Need to import "+ table +" before running.")
+                    exit()
 
     def readRandom(self, name) -> str:
-        """ Gets a random row from a table. """
+        """ Gets a random entry from a list. """
 
-        self.store.row_factory = None
-        if self.dbtype is "sqlite": rand = "RANDOM()"
-        else: rand = "RAND()"
-        data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 1")
-        if data is None:
-            print("ERROR: Please import " + name + " into database.")
-            exit()
-        return(data[0][0].replace("''", "'"))
+        if self.dbtype is "memcache":
+            return(random.choice(self.store.get(name)))
+        else:
+            self.store.row_factory = None
+            if self.dbtype is "sqlite": rand = "RANDOM()"
+            else: rand = "RAND()"
+            data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 1")
+            if data is None:
+                print("ERROR: Please import " + name + " into database.")
+                exit()
+            return(data[0][0].replace("''", "'"))
 
     def readVisited(self) -> list:
         """ Gets list of posts already visited. """
 
-        self.store.row_factory = lambda cursor, row: row[0]
-        visited = self.fetchStmt("* FROM "+ cfg.VISITED_STORE)
-        if len(visited) == 0:
-            return([])
-        return(visited)
+        if self.dbtype is "memcache":
+            return(self.store.get(cfg.VISITED_STORE))
+        else:
+            self.store.row_factory = lambda cursor, row: row[0]
+            visited = self.fetchStmt("* FROM "+ cfg.VISITED_STORE)
+            if len(visited) == 0: return([])
+            return(visited)
 
     def writeVisited(self) -> None:
         """ Saves list of posts already visited. """
@@ -172,11 +206,14 @@ class DB:
         if length > cfg.MAX_VISITED:
             cfg.already_visited = cfg.already_visited[length - cfg.MAX_VISITED:length]
 
-        self.executeStmt("DELETE FROM "+ cfg.VISITED_STORE)
-        for visited in cfg.already_visited:
-            stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
-            self.executeStmt(stmt)
-        self.store.commit()
+        if self.dbtype is "memcache":
+            self.store.set(cfg.VISITED_STORE, cfg.already_visited)
+        else:
+            self.executeStmt("DELETE FROM "+ cfg.VISITED_STORE)
+            for visited in cfg.already_visited:
+                stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
+                self.executeStmt(stmt)
+            self.store.commit()
 
     def readSnappy(self, r) -> list:
         """ Reads and parses Snapshillbot entries. """

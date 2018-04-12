@@ -1,5 +1,4 @@
 import os, getopt
-import sqlite3
 import config as cfg, rants
 
 def printUsage(usage):

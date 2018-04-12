@@ -4,7 +4,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.1 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
@@ -15,9 +15,10 @@ SUBREDDIT = "buttcoin"
 # preferred as database needs are minimal and it's fast and lightweight compared to
 # others.
 
-HOSTED = True
+HOSTED = False
 ENCODING = "utf-8"
-STORE_TYPE = "sqlite"
+STORE_TYPE = "memcache"
+#STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
 #MYSQL_USER = "zenbot"
 #MYSQL_PW = os.environ['MYSQL_PW']
@@ -32,6 +33,7 @@ HAIKU_ODDS = 10
 SNAPPY_STORE = "snappy"
 SNAPPY_ODDS = 999999999999
 RANT_STORE = "rants"
+RANT_TABLE = "lex_insult"
 REPLY_STORE = "replies"
 REPLY_ODDS = 30
 
