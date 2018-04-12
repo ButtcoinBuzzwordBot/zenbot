@@ -11,7 +11,8 @@ class Rants:
         """ Pulls a random term for a placeholder. """
 
         [term] = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 1")
-        return(str(term).replace("''", "'"))
+        term = str(term).replace("''", "'")
+        return(term)
 
     def importData(self, fname):
         """ Parses a text file with entries for multiple tables. """
@@ -46,6 +47,4 @@ class Rants:
             else:
                 val = self.getTerm(key)
             template = template.replace("["+ key +"]", val, 1)
-            
-        if cfg.DEBUG: print(template)
         return(template)

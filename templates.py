@@ -5,19 +5,18 @@
 """
 templates = [
     
-    [["insult", "namecall", "coin", "substance", "award", "coin", "wallet", 
-      "namecall", "coin", "wallet", "adjective", "secure", "coin", "alpha",
+    [["insult", "namecall", "coin", "substance", "doingthing", "award", "coin",
+      "wallet", "namecall", "coin", "wallet", "adjective", "secure", "coin", "alpha",
       "namecall", "penalty"],
-     ["[insult]. Only [namecall] trades away [coin]. Anybody who is seriously "+
+     ["[insult]. Only a [namecall] trades away [coin]. Anybody who is seriously "+
       "interested in [substance] knows that [doingthing] is quite simple. It "+
       "doesn't take a(n) [award] winner to google how to secure [coin] with "+
       "[wallet] but suffice to say only a [namecall] keeps [coin] on a "+
       "computer. Buy it, transfer it to [wallet] as [adjective] fast as "+
       "possible, and then [secure].\n\n If you sell your [coin] or [alpha] "+
       "comes in and transfers it without consent, you are a [namecall] that "+
-      "deserves [penalty] coming your way."]],
-]
-"""
+      "deserves the [penalty] coming your way."]],
+
     [["namecall", "pastaction", "authorities", "threat", "penalty", "crazies",
       "avoid", "dude", "criminal", "meeting", "screw", "dude", "int", "timespan",
       "authorities", "dude", "authorities", "insult", "complaint", "reward"],
@@ -84,4 +83,3 @@ templates = [
       "may [blessing]."+
       "  \n&nbsp;  \n^^overheard ^^by ^^/u/ZenMasterBot"]]
 ]
-"""

@@ -444,7 +444,6 @@ XVG
 Litecoin
 Petro
 Satoshi''s revolutionary Internet currency
-Satoshi''s Glorious Blockchain
 Nano
 Byteball Bytes
 Verge
@@ -483,6 +482,7 @@ a CD-R
 a box and a tube of epoxy
 a hole under your birdbath
 a fingerprint and voice sensor 2fa safe
+Satoshi''s Glorious Blockchain
 
 [secure]
 hide it under your birdbath
