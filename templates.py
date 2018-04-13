@@ -36,7 +36,7 @@ templates = [
       "computer. Buy it, transfer it to [wallet] as [adjective] fast as "+
       "possible, and then [secure].\n\n If you sell your [coin] or [alpha] "+
       "comes in and transfers it without consent, you are a [namecall] that "+
-      "deserves the [penalty] coming your way."]],
+      "deserves [penalty], which is coming your way."]],
 
     [["namecall", "pastaction", "authorities", "threat", "penalty", "crazies",
       "avoid", "dude", "criminal", "meeting", "screw", "dude", "int", "timespan",

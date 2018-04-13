@@ -628,8 +628,8 @@ punctuated
 somebody with stronger hands
 a big swinging dick
 a captain of industry
-serial entrepeneur
-strong hand
+a serial entrepeneur
+a strong hand
 Satoshi Nakamoto
 the kid who beats you up on the playground
 Donald J. Trump
@@ -686,19 +686,30 @@ threaten to torture
 [penalty]
 all the pain and derision
 being forced into paying tax-theft on bitcoin gainz
-make to pay taxes for creepto trades
-loss of his private keys
+being made to pay taxes for creepto trades
+the loss of his private keys
 seizure of his Nano Ledger
 forfeiture of massive bitcoin earnings
 loss of god-given freedumbz
 having to admit to wearing women''s panties under his clothes
 getting caught picking his nose and eating it
+being tarred and feathered
+going to jail for tax evasion
+to be led through the streets naked while heckled
+losing all the mad gainz
+being forced to leave the country
+having their visa revoked
+being subjected to public derision
 
 [avoid]
 get out of owing them money
-just skip out the country
+just skip out of the country
 avoid serving jail time
 scam people out of money
+skip out on bail
+go into hiding
+be stuck in a witness protection program
+get kneecapped by loan sharks
 
 [dude]
 dude
@@ -706,11 +717,18 @@ sociopath
 that guy
 self-serving idiot
 guy
+schmuck
+putz
 idiot
 bed-wetter
 asshat
 booger-eater
 diaper fetishist
+ass-muncher
+armpit-licker
+knuckle-dragger
+mouth-breather
+adult diaper fetishist
 
 [criminal]
 convicted felon
@@ -729,6 +747,7 @@ wannabe dictator
 sociopath
 embezzler
 petty thief
+psychopath
 
 [screw]
 fuck
@@ -747,6 +766,11 @@ use a blackjack on
 [complaint]
 rape-theft-taxation
 war-mongering foreign policy
+jack-booted statist thinking
+heavy-handed regulations
+20th century backward thinking
+repression of the new paradigm
+church sponsored insanity
 
 [reward]
 survive the upcoming apocalypse

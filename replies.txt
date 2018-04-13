@@ -100,9 +100,11 @@ IF !MakeMe() OPEN Can("whoopass");|
 3 is 1 more than 2. That is the absolute most simple and brilliant elevator pitch for
 using ternary.|
 Ha. Ha. Ha. I get it. Ha. Comedy Godl.|
-Dunno. Ever since my code switched to ternary I cannot make up my mind.|
+I dunno. Ever since my code switched to ternary I cannot make up my mind.|
 Your ternary computer is not working? Have you tried turning it Off and On and
 Really On again? Is the three-pronged electric cord plugged in? Are you using an HMDI
 monitor that can display trixels? Have you tried calling support, or not, or maybe?|
-Ternary Logic: You are damned if you do, you are damned if you do not, but there is
-also a chance you are completely fucked.
+Ternary Logic: You are damned if you do, damned if you do not, but there is also a
+chance you are completely fucked.|
+To be historically accurate, it was Flavor-Aid, not Kool-Aid, but the results were
+the same.

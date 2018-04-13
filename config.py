@@ -64,7 +64,7 @@ sig = (
 )
 
 def botReply(reply):
-    return(reply + "^(*beep*)\n")
+    return(reply + "\n^(*beep*)")
 
 shortsig = (
     "\n_____\n\n^(^Blame ^/u/" + AUTHOR + " ^if ^you ^must)"
