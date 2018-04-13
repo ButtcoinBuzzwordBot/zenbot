@@ -2,9 +2,9 @@ import os, re
 import config as cfg
 if cfg.STORE_TYPE is "memcache":
     import memcache
-elif cf.STORE_TYPE is "sqlite":
+elif cfg.STORE_TYPE is "sqlite":
     import sqlite3
-elif cf.STORE_TYPE is "mysql":
+elif cfg.STORE_TYPE is "mysql":
     import pymysql as mysql
 
 class DB:
@@ -85,12 +85,11 @@ class DB:
 
     def executeStmt(self, stmt) -> None:
         """ Executes an atomic database operation. """
-        
+
         try:
             cur = self.store.cursor()
             cur.execute(stmt)
-        except (sqlite3.Error, mysql.Error) as err:
-            print(err)
+        except:
             print("ERROR: Cannot execute " + stmt)
             exit()
         finally:
@@ -112,29 +111,35 @@ class DB:
         return(data)
 
     def checkTable(self, table) -> int:
-        """ Checks to see if a table exists. """
+        """ Checks to see if a table/keystore exists. """
 
-        try:
-            cur = self.store.cursor()
-            cur.execute("SELECT COUNT(*) FROM "+ table)
-            [count] = cur.fetchall()
-        except sqlite3.Error as err:
-            print(err)
-            return(0)
-        finally:
-            cur.close()
+        if self.dbtype is "sqlite" or self.dbtype is "mysql":
+            try:
+                cur = self.store.cursor()
+                cur.execute("SELECT COUNT(*) FROM "+ table)
+                [count] = cur.fetchall()
+            except sqlite3.Error as err:
+                print(err)
+                return(0)
+            finally:
+                cur.close()
+        elif self.dbtype is "memcache":
+            if self.store.get(table) is None:
+                count = 0
+
         return(count)
         
     def deleteTable(self, table) -> None:
         """ Deletes all entries from a table. """
 
-        try:
-            cur = self.store.cursor()
-            cur.execute("DELETE FROM "+ table)
-        except:
-            return
-        finally:
-            cur.close()
+        if self.dbtype is "sqlite" or self.dbtype is "mysql":
+            try:
+                cur = self.store.cursor()
+                cur.execute("DELETE FROM "+ table)
+            except:
+                return
+            finally:
+                cur.close()
 
     def dropTable(self, table) -> None:
         """ Drops a table whether or not it exists. """

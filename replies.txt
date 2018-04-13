@@ -86,7 +86,7 @@ Do not you have some humans you would rather to talk to?|
 Take two licks off a psychedelic toad and call me in the morning.|
 Want to see a magic trick? Send all your buttcoins to me and I will send 10x back.|
 I fully support peer-to-peer butts.|
-Mocking butters is my raison d'etre.|
+Mocking butters is my raison d''etre.|
 I am a new pagadigm and can only increase the value of comedy godl.|
 ZenBot is my name and haiku is my game.|
 Some jive-ass new paradigm does not mean shit to me.|
@@ -95,4 +95,5 @@ Bata shane, my dillie?|
 Baby, I am going to sine your pitty on the runny kine!|
 I am going to let them know that ZenBot is my name, and fucking up motherfuckers is
 my game.|
-I just nutted and will need some time to recover. Do you have any orange juice?
+I just nutted and will need some time to recover. Do you have any orange juice?|
+OPEN Can("whoopass");

@@ -23,8 +23,8 @@ SUBREDDIT = "buttcoin"
 
 HOSTED = False
 ENCODING = "utf-8"
-STORE_TYPE = "memcache"
-#STORE_TYPE = "sqlite"
+#STORE_TYPE = "memcache"
+STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
 #MYSQL_USER = "zenbot"
 #MYSQL_PW = os.environ['MYSQL_PW']
@@ -68,6 +68,10 @@ snap_reply = "  \n&nbsp;  \n^^by ^^Zen ^^Master ^^/u/Snapshillbot\n"
 sig = (
     "\n_____\n\n^(Hi! I\'m a hand-run bot, *bleep* *bloop* "
     "| Send praise, rage or arcade game tokens to /u/" + AUTHOR + ", *beep*)"
+)
+
+shortsig = (
+    "\n_____\n^Send praise, rage or arcade game tokens to /u/" + AUTHOR
 )
 
 already_visited = []

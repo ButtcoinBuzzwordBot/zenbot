@@ -31,7 +31,7 @@ templates = [
       "to go to [meeting] awhile back. Doubt he can even travel now.\n\n "+
       "But yeah, [screw] that [dude]. People kill to get into the USA and "+
       "can spend [int] [timespan]s to get citizenship (or at least did, "+
-      "but with the [authorities] running things, why would anybody "+
+      "but with [authorities] running things, why would anybody "+
       "want to live there?) For this [dude] to revoke it to fuck "+
       "[authorities] and then turn around and continue to bitch about "+
       "politics? Fuck that shit. [insult] and any complaints about "+

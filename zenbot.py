@@ -16,7 +16,7 @@ def checkInbox(r, dbase):
         msg.mark_read()
         if msg.author not in IGNORE:
             reply = "*bleep bloop* "+ dbase.readRandom(cfg.REPLY_STORE) +" *beep*"
-            msg.reply(reply)
+            msg.reply(reply + cfg.shortsig)
 
 def main(r):
     """ Initialize and recurse through posts. """

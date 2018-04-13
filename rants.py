@@ -11,8 +11,8 @@ class Rants:
         """ Pulls a random term for a placeholder. """
 
         [term] = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 1")
-        term = str(term).replace("''", "'")
-        return(term)
+        term = str(term)
+        return(term.replace("''", "'"))
 
     def importData(self, fname):
         """ Parses a text file with entries for multiple tables. """
@@ -33,7 +33,7 @@ class Rants:
                     numlines += 1
                 numtables += 1
             self.db.store.commit()
-            print(numlines, "entries imported into", numtables, "tables.")
+            print("Imported", numlines, "rant entries into", numtables, "tables")
             exit()
 
     def getTemplate(self) -> dict:
