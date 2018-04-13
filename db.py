@@ -1,8 +1,11 @@
 import os, re
-import sqlite3
-#import pymysql as mysql
-#import memcache
 import config as cfg
+if cfg.STORE_TYPE is "memcache":
+    import memcache
+elif cf.STORE_TYPE is "sqlite":
+    import sqlite3
+elif cf.STORE_TYPE is "mysql":
+    import pymysql as mysql
 
 class DB:
     """ Database class. Supports SQLite and MySQL. """
@@ -43,9 +46,10 @@ class DB:
 
         elif dbtype is "memcache":
             try:
-                self.store = memcache.Client(['127.0.0.1:11211'], debug=1)
-            except memcache.Error as err:
-                print(err)
+                self.store = memcache.Client(['localhost:11211'], debug=1)
+                if cfg.DEBUG:
+                    self.getMemcacheStats()
+            except:
                 print("ERROR: Unable to initialize memcache.")
                 exit()
             self.createDB()
@@ -60,6 +64,24 @@ class DB:
             exit()
 
         cfg.already_visited = self.readVisited()
+
+    def getMemcacheStats(self) -> None:
+        """ Prints memcache stats for debugging. """
+
+        for node_stats in self.store.get_stats():
+            server, stats = node_stats
+            print ('-----------------------------------------')
+            print (server)
+            print ('-----------------------------------------')
+            for stat_name, value in sorted(stats.iteritems()):
+                if not stat_name.startswith('ep'):
+                    if stat_name not in ('libevent', 'version'):
+                        print (stat_name.ljust(25), value.rjust(15))
+                print ('-----------------------------------------')
+            for stat_name, value in sorted(stats.iteritems()):
+                if stat_name.startswith('ep'):
+                    if stat_name not in ('ep_dbname', 'ep_version'):
+                        print (stat_name.ljust(25), value.rjust(15))
 
     def executeStmt(self, stmt) -> None:
         """ Executes an atomic database operation. """
@@ -165,7 +187,7 @@ class DB:
         for key in keys:
             if self.dbtype is "memcache":
                 if self.store.get(key) is None:
-                    print("ERROR: Need to load "+ table +" data before running.")
+                    print("ERROR: Need to load "+ key +" data before running.")
                     exit()
             else:
                 result = self.checkTable(key)

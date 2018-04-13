@@ -1,6 +1,7 @@
 """
-    [["t"],
-     ["It’s all based on strong fundamentals. There was at one point a fraudulent report indicating that spring frosts in Distubuted States of Ledgeria have severally impacted Cointree blooms, however it looks it was not the case and we are looking at normal-to-above normal cryptoharvest."+
+    [["reward"],
+     ["It’s all based on [reward]. There was at one point a "+
+"fraudulent report indicating that spring frosts in Distubuted States of Ledgeria have severally impacted Cointree blooms, however it looks it was not the case and we are looking at normal-to-above normal cryptoharvest."+
       "  \n&nbsp;  \n^^inspired ^^by ^^/u/siconik"]],
 """
 templates = [
@@ -8,9 +9,10 @@ templates = [
     [["insult", "namecall", "coin", "substance", "doingthing", "award", "coin",
       "wallet", "namecall", "coin", "wallet", "adjective", "secure", "coin", "alpha",
       "namecall", "penalty"],
+
      ["[insult]. Only a [namecall] trades away [coin]. Anybody who is seriously "+
       "interested in [substance] knows that [doingthing] is quite simple. It "+
-      "doesn't take a(n) [award] winner to google how to secure [coin] with "+
+      "doesn't take a [award] winner to google how to secure [coin] with "+
       "[wallet] but suffice to say only a [namecall] keeps [coin] on a "+
       "computer. Buy it, transfer it to [wallet] as [adjective] fast as "+
       "possible, and then [secure].\n\n If you sell your [coin] or [alpha] "+
@@ -22,7 +24,7 @@ templates = [
       "authorities", "dude", "authorities", "insult", "complaint", "reward"],
 
      ["Yeah, [namecall] [pastaction] his citizenship so [authorities] wouldn't "+
-      "[threat] and force him to [penalty]. Of course, turns out the [crazies] "+
+      "[threat] and back him into [penalty]. Of course, turns out [crazies] "+
       "aren't stupid, you can't just quit your citizenship to [avoid] "+
       "so he's still in serious trouble. And since the [dude] is a [criminal] "+
       "he isn't exactly welcome back. He was denied a visa when he tried "+

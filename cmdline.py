@@ -31,22 +31,27 @@ def processOpts (db, argv) -> None:
     except getopt.GetoptError:
         printUsage(usage)
 
-    table = argv[2]
-    if table not in ARGS:
+    datafiles = [argv[2]]
+    if argv[2] not in ARGS:
         printUsage(usage)
-    elif table == "rants":
-        rant = rants.Rants(db)
-        rant.importData(table)
-        exit()
+    elif argv[2] == "all":
+        datafiles = ARGS
 
-    dataf = open(table + ".txt", "r", encoding=cfg.ENCODING)
-    data = dataf.read().split("|")
-    dataf.close()
+    for df in datafiles:
+        if df == "rants":
+            rant = rants.Rants(db)
+            rant.importData(table)
+            if argv[2] == "rants":
+                exit()
+        else:
+            dataf = open(table + ".txt", "r", encoding=cfg.ENCODING)
+            data = dataf.read().split("|")
+            dataf.close()
 
-    db.deleteTable(table)
-    for line in data:
-        if cfg.DEBUG: print("Adding: " + line)
-        db.executeStmt("INSERT INTO " + table + " VALUES ('" + line + "')")
-    db.closeDB()
-    print("Imported " + str(len(data)) + " entries into " + table)
+            db.deleteTable(table)
+            for line in data:
+                if cfg.DEBUG: print("Adding: " + line)
+                db.executeStmt("INSERT INTO " + table + " VALUES ('" + line + "')")
+            db.closeDB()
+            print("Imported " + str(len(data)) + " entries into " + table)
     exit()

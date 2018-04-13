@@ -23,8 +23,8 @@ SUBREDDIT = "buttcoin"
 
 HOSTED = False
 ENCODING = "utf-8"
-#STORE_TYPE = "memcache"
-STORE_TYPE = "sqlite"
+STORE_TYPE = "memcache"
+#STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
 #MYSQL_USER = "zenbot"
 #MYSQL_PW = os.environ['MYSQL_PW']
