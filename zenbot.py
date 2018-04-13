@@ -6,7 +6,7 @@ import config as cfg, db, comments, cmdline, oauth
 def checkInbox(r, dbase):
     """ Check inbox and reply randomly to new messages from regular users. """
 
-    IGNORE = [cfg.ZENBOT_USERNAME, "reddit"] # TODO: cfg.AUTHOR
+    IGNORE = [cfg.ZENBOT_USERNAME, cfg.AUTHOR, "reddit"]
     msgs = list(r.inbox.unread(limit=None))
 
     if len(msgs) > 0 and not cfg.HOSTED:
@@ -15,8 +15,7 @@ def checkInbox(r, dbase):
     for msg in msgs:
         msg.mark_read()
         if msg.author not in IGNORE:
-            reply = "*bleep bloop* "+ dbase.readRandom(cfg.REPLY_STORE) +" *beep*"
-            msg.reply(reply + cfg.shortsig)
+            msg.reply(cfg.botReply(dbase.readRandom(cfg.REPLY_STORE)))
 
 def main(r):
     """ Initialize and recurse through posts. """
@@ -39,18 +38,19 @@ def main(r):
                 # (top) must be processed last, so traverse comment trees depth-first.
                 if cfg.DEBUG: print("submission: " + format(post.id))
                 for comment in post.comments:
-                    c.checkComment(comment)
+                    newc = comments.Comments(dbase, r, comment)
+                    newc.checkComment()
 
-                # TODO: differentiate post vs. comment in class?
-                c.comment = post
-                if not c.alreadyVisited(post):
-                    c.markVisited(post)
+                if not c.alreadyVisited():
+                    c.markVisited()
                     if random.randrange(0, cfg.HAIKU_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
-                    elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
-                        c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
+                    #elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
+                    #    c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
+                    elif random.randrange(0, cfg.REPLY_ODDS) < 1:
+                        c.postReply(dbase.readRandom(cfg.REPLY_STORE))
 
                 dbase.writeVisited()
 

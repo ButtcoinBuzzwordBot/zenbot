@@ -3,6 +3,25 @@
      ["It’s all based on [reward]. There was at one point a "+
 "fraudulent report indicating that spring frosts in Distubuted States of Ledgeria have severally impacted Cointree blooms, however it looks it was not the case and we are looking at normal-to-above normal cryptoharvest."+
       "  \n&nbsp;  \n^^inspired ^^by ^^/u/siconik"]],
+
+[["", ],
+["Things have hit "peak 
+mainstream" as far as I'm concerned. Can't get more peak than
+a former camera company
+selling
+cloud block miners,
+tea companies
+starting
+"block chain projects" and 
+hooters franchises 
+announcing
+"something with the blockchain".
+
+I honestly think this is [coin]'s last mainstream hurrah. It publicly sold
+out and abandoned any premise to be a digital currency useable by [criminal]s.
+Not only that but it proved the blockchain cannot scale. At it's core, Bitcoin is deeply, unfixably flawed and "the blockchain" is a datastructure, not a business model or a solution to a problem.
+
+Now, the whole crypto mess could turn into some kind of amway underground MLM goldbug thing. But aside from being a public laughing stock.... the goose is cooked. Bitcoin is dead (or at least will be shortly)
 """
 templates = [
     

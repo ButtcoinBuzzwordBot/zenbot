@@ -1,16 +1,16 @@
 # Zen Bot configuration file. Bleep bloop.
 #
-# TODO v1.2: Add Couchbase memcache/error logging for remote hosting.
 # TODO: post reply to parent although complicated re: praw models.
 # TODO: rewrite template system to find replace vars.
 # FIX: never reply to self.
 # FIX: don't allow random replies to same thread as where invoked.
+# TODO: commit to v1.2 after removing Snappy code.
 
 import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = True
+DEBUG = False
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.1 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
@@ -23,7 +23,7 @@ SUBREDDIT = "buttcoin"
 
 HOSTED = False
 ENCODING = "utf-8"
-#STORE_TYPE = "memcache"
+###STORE_TYPE = "memcache"
 STORE_TYPE = "sqlite"
 #STORE_TYPE = "mysql"
 #MYSQL_USER = "zenbot"
@@ -36,12 +36,12 @@ KOAN_STORE = "koans"
 KOAN_ODDS = 15
 HAIKU_STORE = "haiku"
 HAIKU_ODDS = 15
-SNAPPY_STORE = "snappy"
-SNAPPY_ODDS = 999999999999
-RANT_STORE = "rants"
-RANT_TABLE = "lex_insult"
+#SNAPPY_STORE = "snappy"
+#SNAPPY_ODDS = 999999999999
 REPLY_STORE = "replies"
 REPLY_ODDS = 30
+RANT_STORE = "rants"
+RANT_TABLE = "lex_insult"
 
 VISITED_STORE = "visited"
 if DEBUG: VISITED_STORE += "_debug"
@@ -58,8 +58,9 @@ SLEEP_TIMEOUT = 30
 TRIGGER = "!ZenBot"
 CMD_KOAN = TRIGGER + " koan"
 CMD_HAIKU = TRIGGER + " haiku"
-CMD_SNAPPY = TRIGGER + " snappy"
+#CMD_SNAPPY = TRIGGER + " snappy"
 CMD_RANT = TRIGGER + " rant"
+CMD_REPLY = TRIGGER + " quip"
 
 # Reply for Snapshillbot quote.
 snap_reply = "  \n&nbsp;  \n^^by ^^Zen ^^Master ^^/u/Snapshillbot\n"
@@ -70,8 +71,11 @@ sig = (
     "| Send praise, rage or arcade game tokens to /u/" + AUTHOR + ", *beep*)"
 )
 
+def botReply(reply):
+    return(reply + "^(*beep*)\n")
+
 shortsig = (
-    "\n_____\n^Send praise, rage or arcade game tokens to /u/" + AUTHOR
+    "\n_____\n\n^(^Blame ^/u/" + AUTHOR + " ^if ^you ^must)"
 )
 
 already_visited = []
