@@ -241,10 +241,3 @@ class DB:
                 stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
                 self.executeStmt(stmt)
             self.store.commit()
-
-    def readSnappy(self, r) -> list:
-        """ Reads and parses Snapshillbot entries. """
-
-        wiki = r.subreddit('Snapshillbot').wiki['extxt/buttcoin']
-        quotes = wiki.content_md
-        return [q.strip() for q in re.split('\r\n-{3,}\r\n', quotes) if q.strip()]

@@ -87,6 +87,4 @@ class Comments:
                 self.postReply(self.db.readRandom(cfg.HAIKU_STORE))
             elif (cfg.CMD_REPLY in self.post.body):
                 self.postReply(cfg.botReply(self.db.readRandom(cfg.REPLY_STORE)))
-            #elif (cfg.CMD_SNAPPY in self.post.body):
-            #    self.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
             cfg.already_visited.append(str(self.post.id))

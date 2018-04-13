@@ -25,7 +25,6 @@ def main(r):
         cmdline.processOpts(dbase, sys.argv)
     dbase.checkDB()
     checkInbox(r, dbase)
-    cfg.snappy_quotes = dbase.readSnappy(r)
 
     while True:
         try:
@@ -45,8 +44,6 @@ def main(r):
                     c.markVisited()
                     if random.randrange(0, cfg.HAIKU_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.HAIKU_STORE))
-                    #elif random.randrange(0, cfg.SNAPPY_ODDS) < 1:
-                    #    c.postReply(random.choice(cfg.snappy_quotes) + cfg.snap_reply)
                     elif random.randrange(0, cfg.KOAN_ODDS) < 1:
                         c.postReply(dbase.readRandom(cfg.KOAN_STORE))
                     elif random.randrange(0, cfg.REPLY_ODDS) < 1:

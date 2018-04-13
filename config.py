@@ -1,10 +1,6 @@
 # Zen Bot configuration file. Bleep bloop.
 #
-# TODO: post reply to parent although complicated re: praw models.
 # TODO: rewrite template system to find replace vars.
-# FIX: never reply to self.
-# FIX: don't allow random replies to same thread as where invoked.
-# TODO: commit to v1.2 after removing Snappy code.
 
 import os
 
@@ -12,7 +8,7 @@ import os
 
 DEBUG = False
 AUTHOR = "BarcaloungerJockey"
-BOTNAME = "python:zenmaster.bot:v1.1 (by /u/" + AUTHOR +")"
+BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
 
 # If HOSTED is True the script runs indefinitely. Set appropriate storage type and
@@ -20,6 +16,8 @@ SUBREDDIT = "buttcoin"
 # text but if not you can set a default encoding for input files below. SQLite is
 # preferred as database needs are minimal and it's fast and lightweight compared to
 # others.
+#
+# Memcache and Couchbase support on hold until Python 3.7 supported.
 
 HOSTED = False
 ENCODING = "utf-8"
@@ -36,8 +34,6 @@ KOAN_STORE = "koans"
 KOAN_ODDS = 15
 HAIKU_STORE = "haiku"
 HAIKU_ODDS = 15
-#SNAPPY_STORE = "snappy"
-#SNAPPY_ODDS = 999999999999
 REPLY_STORE = "replies"
 REPLY_ODDS = 30
 RANT_STORE = "rants"
@@ -58,14 +54,10 @@ SLEEP_TIMEOUT = 30
 TRIGGER = "!ZenBot"
 CMD_KOAN = TRIGGER + " koan"
 CMD_HAIKU = TRIGGER + " haiku"
-#CMD_SNAPPY = TRIGGER + " snappy"
 CMD_RANT = TRIGGER + " rant"
 CMD_REPLY = TRIGGER + " quip"
 
-# Reply for Snapshillbot quote.
-snap_reply = "  \n&nbsp;  \n^^by ^^Zen ^^Master ^^/u/Snapshillbot\n"
-
-# Signature for all replies.
+# Signatures for replies.
 sig = (
     "\n_____\n\n^(Hi! I\'m a hand-run bot, *bleep* *bloop* "
     "| Send praise, rage or arcade game tokens to /u/" + AUTHOR + ", *beep*)"
@@ -79,4 +71,3 @@ shortsig = (
 )
 
 already_visited = []
-snappy_quotes = []
