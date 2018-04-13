@@ -24,9 +24,10 @@ def main(r):
     if len(sys.argv) > 1:
         cmdline.processOpts(dbase, sys.argv)
     dbase.checkDB()
-    checkInbox(r, dbase)
 
     while True:
+        checkInbox(r, dbase)
+
         try:
             sub = r.subreddit(cfg.SUBREDDIT).new(limit=cfg.SUBLIMIT)
             for submission in sub:

@@ -19,7 +19,7 @@ SUBREDDIT = "buttcoin"
 #
 # Memcache and Couchbase support on hold until Python 3.7 supported.
 
-HOSTED = False
+HOSTED = True
 ENCODING = "utf-8"
 ###STORE_TYPE = "memcache"
 STORE_TYPE = "sqlite"
@@ -31,11 +31,11 @@ DATABASE = "zenbot"
 
 # Example: odds set at 1000 are approx. 1-in-1000 chance to post.
 KOAN_STORE = "koans"
-KOAN_ODDS = 15
+KOAN_ODDS = 20
 HAIKU_STORE = "haiku"
 HAIKU_ODDS = 15
 REPLY_STORE = "replies"
-REPLY_ODDS = 30
+REPLY_ODDS = 15
 RANT_STORE = "rants"
 RANT_TABLE = "lex_insult"
 
