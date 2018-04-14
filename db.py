@@ -1,5 +1,6 @@
-import os, re
+import os, re, random
 import config as cfg
+
 if cfg.STORE_TYPE is "memcache":
     import memcache
 elif cfg.STORE_TYPE is "sqlite":
@@ -21,9 +22,8 @@ class DB:
             try:
                 self.store = sqlite3.connect(cfg.DATABASE)
             except sqlite3.Error as err:
-                print(err)
-                print("ERROR: Cannot create or connect to "+ cfg.DATABASE)
-                exit()
+                raise cfg.ExitException(
+                    err + "\nERROR: Cannot create or connect to "+ cfg.DATABASE)
 
         elif dbtype is "mysql":
             try:
@@ -33,9 +33,8 @@ class DB:
                                            db=cfg.DATABASE,
                                            charset='utf8')
             except mysql.Error as err:
-                print(err)
-                print("ERROR: Cannot create or connect to "+ cfg.DATABASE)
-                exit()
+                raise cfg.ExitException(
+                    err + "\nERROR: Cannot create or connect to "+ cfg.DATABASE)
 
             cur = self.store.cursor()
             cur.execute("SHOW TABLES LIKE '"+ cfg.VISITED_STORE +"'")
@@ -50,18 +49,15 @@ class DB:
                 if cfg.DEBUG:
                     self.getMemcacheStats()
             except:
-                print("ERROR: Unable to initialize memcache.")
-                exit()
+                raise cfg.ExitException("ERROR: Unable to initialize memcache.")
             self.createDB()
 
         else:
-            print("Database type "+ dbtype +" not supported.")
-            exit()
+            raise cfg.ExitException("Database type "+ dbtype +" not supported.")
 
         if not dbexists:
             self.createDB()
-            print("Database created. Please import all tables before running.")
-            exit()
+            raise cfg.ExitException("Database created. Please import all tables.")
 
         cfg.already_visited = self.readVisited()
 
@@ -90,8 +86,7 @@ class DB:
             cur = self.store.cursor()
             cur.execute(stmt)
         except:
-            print("ERROR: Cannot execute " + stmt)
-            exit()
+            raise cfg.ExitException("ERROR: Cannot execute " + stmt)
         finally:
             cur.close()
 
@@ -103,9 +98,7 @@ class DB:
             cur.execute("SELECT "+ stmt)
             data = cur.fetchall()
         except sqlite3.Error as err:
-            print(err)
-            print("ERROR: Cannot execute SELECT " + stmt)
-            exit()
+            raise cfg.ExitException(err + "\nERROR: Cannot execute SELECT " + stmt)
         finally:
             cur.close()
         return(data)
@@ -118,15 +111,14 @@ class DB:
                 cur = self.store.cursor()
                 cur.execute("SELECT COUNT(*) FROM "+ table)
                 [count] = cur.fetchall()
-            except sqlite3.Error as err:
-                print(err)
+            except:
+                print("\nERROR: Cannot execute SELECT " + stmt)
                 return(0)
             finally:
                 cur.close()
         elif self.dbtype is "memcache":
             if self.store.get(table) is None:
                 count = 0
-
         return(count)
         
     def deleteTable(self, table) -> None:
@@ -167,8 +159,8 @@ class DB:
                 try:
                     dataf = open(key + ".txt", "r", encoding=cfg.ENCODING)
                 except:
-                    print("ERROR: Data file "+ key +".txt does not exist.")
-                    exit()
+                    raise cfg.ExitException(
+                        "ERROR: Data file "+ key +".txt does not exist.")
                 data = dataf.read().split("|")
                 dataf.close()
                 self.store.set(key, data)
@@ -192,13 +184,13 @@ class DB:
         for key in keys:
             if self.dbtype is "memcache":
                 if self.store.get(key) is None:
-                    print("ERROR: Need to load "+ key +" data before running.")
-                    exit()
+                    raise cfg.ExitException(
+                        "ERROR: Need to load "+ key +" data before running.")
             else:
                 result = self.checkTable(key)
                 if int(result) < 1:
-                    print("ERROR: Need to import "+ key +" before running.")
-                    exit()
+                    raise cfg.ExitException(
+                        "ERROR: Need to import "+ key +" before running.")
 
     def readRandom(self, name) -> str:
         """ Gets a random entry from a list. """
@@ -209,11 +201,12 @@ class DB:
             self.store.row_factory = None
             if self.dbtype is "sqlite": rand = "RANDOM()"
             else: rand = "RAND()"
-            data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 1")
+            data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 5")
             if data is None:
-                print("ERROR: Please import " + name + " into database.")
-                exit()
-            return(data[0][0].replace("''", "'"))
+                raise cfg.ExitException(
+                    "ERROR: Please import " + name + " into database.")
+            entry = random.choice(data)
+            return(entry[0].replace("''", "'"))
 
     def readVisited(self) -> list:
         """ Gets list of posts already visited. """

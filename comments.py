@@ -59,8 +59,7 @@ class Comments:
             time.sleep(cfg.RATELIMIT)
             self.db.writeVisited()
         except praw.exceptions.APIException as err:
-            print(err)
-            exit()
+            raise cfg.ExitException(err)
 
     def checkComment(self):
         """ Post replies to random submissions and trigger replies. """
@@ -73,7 +72,6 @@ class Comments:
             newc = Comments(self.db, self.r, reply)
             newc.checkComment()
 
-        # TODO: add: or self.alreadyVisited(comment.parent()):
         if self.alreadyVisited():
             return
         self.markVisited()

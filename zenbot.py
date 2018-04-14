@@ -57,6 +57,9 @@ def main(r):
                 break
             else: time.sleep(cfg.SLEEP_LOOP)
 
+        except cfg.ExitException as err:
+            print(err)
+            exit()
         except:
             if cfg.DEBUG: traceback.print_exc()
             time.sleep(cfg.SLEEP_TIMEOUT)
