@@ -6,7 +6,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
@@ -19,7 +19,7 @@ SUBREDDIT = "buttcoin"
 #
 # Memcache and Couchbase support on hold until Python 3.7 supported.
 
-HOSTED = True
+HOSTED = False
 ENCODING = "utf-8"
 ###STORE_TYPE = "memcache"
 STORE_TYPE = "sqlite"

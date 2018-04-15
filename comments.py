@@ -51,7 +51,7 @@ class Comments:
 
         parent = self.getParent()
         if parent.author == cfg.ZENBOT_USERNAME:
-            print("Reply is to bot, skipping.")
+            if cfg.DEBUG: print("Reply is to bot, skipping.")
             return None
 
         try:
