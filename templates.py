@@ -76,5 +76,5 @@ templates = [
       "could be considered a <thought>. Everyone <area> is now "+
       "<downgrade> for having listened to it. I award you <prize>, and "+
       "may <blessing>."+
-      "  \n&nbsp;  \n^^overheard ^^by ^^/u/ZenMasterBot"]]
+      "  \n&nbsp;  \n^^overheard ^^by ^^/u/ZenMasterBot"]],
 ]

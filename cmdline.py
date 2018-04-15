@@ -54,7 +54,6 @@ def processOpts (db, argv) -> None:
 
             db.deleteTable(df)
             for line in data:
-                if cfg.DEBUG: print("Adding: " + line)
                 db.executeStmt("INSERT INTO " + df + " VALUES ('" + line + "')")
             print("Imported " + str(len(data)) + " entries into " + df)
 

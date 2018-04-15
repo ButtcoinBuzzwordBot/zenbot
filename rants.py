@@ -10,8 +10,8 @@ class Rants:
     def getTerm(self, table):
         """ Pulls a random term for a placeholder. """
 
-        [term] = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 1")
-        term = str(term)
+        terms = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 5")
+        term = str(random.choice(terms))
         return(term.replace("''", "'"))
 
     def importData(self, fname):
@@ -46,5 +46,5 @@ class Rants:
                 val = str(random.randrange(2, 200))
             else:
                 val = self.getTerm(key)
-            template = template.replace("["+ key +"]", val, 1)
+            template = template.replace("<"+ key +">", val, 1)
         return(template)
