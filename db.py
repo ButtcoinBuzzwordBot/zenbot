@@ -24,6 +24,7 @@ class DB:
             except sqlite3.Error as err:
                 raise cfg.ExitException(
                     err + "\nERROR: Cannot create or connect to "+ cfg.DATABASE)
+            self.store.row_factory = lambda cursor, row: row[0]
 
         elif dbtype is "mysql":
             try:
@@ -36,6 +37,7 @@ class DB:
                 raise cfg.ExitException(
                     err + "\nERROR: Cannot create or connect to "+ cfg.DATABASE)
 
+            self.store.row_factory = lambda cursor, row: row[0]
             cur = self.store.cursor()
             cur.execute("SHOW TABLES LIKE '"+ cfg.VISITED_STORE +"'")
             result = cur.fetchone()
@@ -57,7 +59,8 @@ class DB:
 
         if not dbexists:
             self.createDB()
-            raise cfg.ExitException("Database created. Please import all tables.")
+            print("Database created. Please import all tables required.")
+            exit()
 
         cfg.already_visited = self.readVisited()
 
@@ -198,7 +201,6 @@ class DB:
         if self.dbtype is "memcache":
             return(random.choice(self.store.get(name)))
         else:
-            self.store.row_factory = None
             if self.dbtype is "sqlite": rand = "RANDOM()"
             else: rand = "RAND()"
             data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 5")
@@ -206,7 +208,7 @@ class DB:
                 raise cfg.ExitException(
                     "ERROR: Please import " + name + " into database.")
             entry = random.choice(data)
-            return(entry[0].replace("''", "'"))
+            return(entry.replace("''", "'"))
 
     def readVisited(self) -> list:
         """ Gets list of posts already visited. """
@@ -214,7 +216,6 @@ class DB:
         if self.dbtype is "memcache":
             return(self.store.get(cfg.VISITED_STORE))
         else:
-            self.store.row_factory = lambda cursor, row: row[0]
             visited = self.fetchStmt("* FROM "+ cfg.VISITED_STORE)
             if len(visited) == 0: return([])
             return(visited)

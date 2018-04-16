@@ -11,7 +11,10 @@ class Rants:
         """ Pulls a random term for a placeholder. """
 
         terms = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 5")
-        term = str(random.choice(terms))
+        term = random.choice(terms)
+        print(term)
+        #term = str(term)
+        #print(term)
         return(term.replace("''", "'"))
 
     def importData(self, fname):
