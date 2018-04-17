@@ -18,7 +18,7 @@ def processOpts (db, argv) -> None:
         exit()
 
     OPTIONS = [["import", "file"]]
-    ARGS = ["koans", "haiku", "replies", "rants"]
+    ARGS = ["koans", "haiku", "replies", "templates", "rants"]
 
     opts, usage = [],[]
     for opt,arg in OPTIONS:

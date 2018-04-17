@@ -171,9 +171,11 @@ class DB:
         else:
             stmts = [
                 "CREATE TABLE "+ cfg.VISITED_STORE +" (visited VARCHAR(16) NOT NULL)",
+                "CREATE TABLE "+ cfg.VISITED_STORE +"_debug (dv VARCHAR(16) NOT NULL)",
                 "CREATE TABLE "+ cfg.KOAN_STORE +" (koan TEXT NOT NULL)",
                 "CREATE TABLE "+ cfg.HAIKU_STORE +" (haiku TEXT NOT NULL)",
-                "CREATE TABLE "+ cfg.REPLY_STORE +" (replies TEXT NOT NULL)"
+                "CREATE TABLE "+ cfg.REPLY_STORE +" (reply TEXT NOT NULL)",
+                "CREATE TABLE "+ cfg.TEMPLATE_STORE +" (template TEXT NOT NULL)"
             ]
 
             for stmt in stmts:
@@ -183,7 +185,8 @@ class DB:
     def checkDB(self) -> None:
         """ Checks that the required tables are populated. """
 
-        keys = [cfg.KOAN_STORE, cfg.HAIKU_STORE, cfg.REPLY_STORE, cfg.RANT_TABLE]
+        keys = [cfg.KOAN_STORE, cfg.HAIKU_STORE, cfg.REPLY_STORE,
+                cfg.TEMPLATE_STORE, cfg.RANT_TABLE]
         for key in keys:
             if self.dbtype is "memcache":
                 if self.store.get(key) is None:
@@ -196,7 +199,7 @@ class DB:
                         "ERROR: Need to import "+ key +" before running.")
 
     def readRandom(self, name) -> str:
-        """ Gets a random entry from a list. """
+        """ Returns a random entry from a table/store. """
 
         if self.dbtype is "memcache":
             return(random.choice(self.store.get(name)))

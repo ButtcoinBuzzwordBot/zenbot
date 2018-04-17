@@ -12,9 +12,6 @@ class Rants:
 
         terms = self.db.fetchStmt("* FROM lex_"+ table +" ORDER BY RANDOM() LIMIT 5")
         term = random.choice(terms)
-        print(term)
-        #term = str(term)
-        #print(term)
         return(term.replace("''", "'"))
 
     def importData(self, fname):
@@ -40,14 +37,24 @@ class Rants:
             exit()
 
     def getTemplate(self) -> dict:
-        """ Parses a template and replaces placeholders with random terms. """
+        """ Loads a random template and replaces placeholders with random terms. """
 
-        [keys, [template]] = random.choice(templates.templates)
-        template = template.replace("''", "'")
-        for key in keys:
+        text = self.db.readRandom(cfg.TEMPLATE_STORE).replace("\n", " ")
+        regex = re.compile("([^<]*)<(\w+)>(.*)")
+        template = ""
+
+        while (len(text) > 0):
+            try:
+                ltext = regex.match(text).group(1)
+                key = regex.match(text).group(2)
+                text = regex.match(text).group(3)
+            except:
+                break
+
             if key == "int":
                 val = str(random.randrange(2, 200))
             else:
                 val = self.getTerm(key)
-            template = template.replace("<"+ key +">", val, 1)
-        return(template)
+            template += ltext + val
+
+        return(template.replace("\\n", "\n") + text)

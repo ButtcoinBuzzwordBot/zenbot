@@ -1,6 +1,6 @@
 # Zen Bot configuration file. Bleep bloop.
 #
-# TODO: rewrite template system to find replace vars.
+# TODO: rewrite template system to find replace vars including nested.
 
 import os
 
@@ -38,6 +38,7 @@ REPLY_STORE = "replies"
 REPLY_ODDS = 20
 RANT_STORE = "rants"
 RANT_TABLE = "lex_insult"
+TEMPLATE_STORE = "templates"
 
 VISITED_STORE = "visited"
 if DEBUG: VISITED_STORE += "_debug"

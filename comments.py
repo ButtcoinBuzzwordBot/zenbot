@@ -58,7 +58,8 @@ class Comments:
             parent.reply(reply + cfg.sig)
             time.sleep(cfg.RATELIMIT)
             self.db.writeVisited()
-        except praw.exceptions.APIException as err:
+        except (praw.exceptions.APIException,
+                cfg.ExitException) as err:
             raise cfg.ExitException(err)
 
     def checkComment(self):
