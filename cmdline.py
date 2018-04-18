@@ -1,23 +1,37 @@
-import os, getopt
-import config as cfg, rants
+import sys, getopt
 
-def printUsage(usage):
+import config as cfg
+import rants
+
+def printUsage(usage, args):
     """ Prints usage message for command line. """
 
-    name = os.path.basename(__file__)
-    print("Usage: " + name + " [", end="")
-    print("|".join(usage) + "]")
-    print("    where <file> = koans|haiku|rants|replies|all")
+    print("Usage: " + sys.argv[0] + " [", end="")
+    print(" | ".join(usage) + "]")
+    print("    where <file> = "+ " | ".join(args) + " | all")
     exit(2)
-        
-def processOpts (db, argv) -> None:
+
+def testData(db, arg) -> None:
+    """ Pulls a set of random data for testing. """
+
+    if arg == "templates":
+        rant = rants.Rants(db)
+        rant.test()
+    else:
+        print("Tests for "+ arg +" not implemented yet.")
+    exit()
+
+def processOpts(db, argv) -> None:
     """ Check optional arguments to import text files into database. """
 
     if cfg.STORE_TYPE is "memcache":
         print("Data is imported at runtime when memcache is used.")
         exit()
 
-    OPTIONS = [["import", "file"]]
+    OPTIONS = [["import", "file"],
+               ["test", "file"],
+    ]
+
     ARGS = ["koans", "haiku", "replies", "templates", "rants"]
 
     opts, usage = [],[]
@@ -33,11 +47,16 @@ def processOpts (db, argv) -> None:
     try:
         [(option, file)] = getopt.getopt(argv[1:], "", opts)[0]
     except getopt.GetoptError:
-        printUsage(usage)
+        printUsage(usage, ARGS)
+
+    if argv[1] == "--test":
+        testData(db, argv[2])
+    elif argv[1] != "--import":
+        printUsage(usage, ARGS)
 
     datafiles = [argv[2]]
     if argv[2] not in ARGS and argv[2] != "all":
-        printUsage(usage)
+        printUsage(usage, ARGS)
     elif argv[2] == "all":
         datafiles = ARGS
 

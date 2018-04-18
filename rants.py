@@ -7,6 +7,12 @@ class Rants:
     def __init__(self, db=None):
         self.db = db
 
+    def test(self) -> None:
+        """ Prints a set of random templates for testing. """
+
+        for i in range(0,3):
+            print(self.getTemplate() + "\n----\n")
+    
     def getTerm(self, table):
         """ Pulls a random term for a placeholder. """
 
@@ -36,7 +42,7 @@ class Rants:
             print("Imported", numlines, "rant entries into", numtables, "tables")
             exit()
 
-    def getTemplate(self) -> dict:
+    def getTemplate(self) -> str:
         """ Loads a random template and replaces placeholders with random terms. """
 
         text = self.db.readRandom(cfg.TEMPLATE_STORE).replace("\n", " ")
