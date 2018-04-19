@@ -1,20 +1,22 @@
 # Bleep bloop! I am a Zen Bot. Om.
 
 import sys, traceback, random, time
-import config as cfg, db, comments, cmdline, oauth
+
+import config as cfg
+import db
+import comments
+import cmdline, oauth
 
 def checkInbox(r, dbase):
     """ Check inbox and reply randomly to new messages from regular users. """
 
-    IGNORE = [cfg.ZENBOT_USERNAME, cfg.AUTHOR, "reddit"]
     msgs = list(r.inbox.unread(limit=None))
-
     if len(msgs) > 0 and not cfg.HOSTED:
         print(str(len(msgs)) +" message(s) in /u/"+ cfg.ZENBOT_USERNAME +"\'s inbox.")
 
     for msg in msgs:
         msg.mark_read()
-        if msg.author not in IGNORE:
+        if msg.author not in cfg.IGNORE:
             msg.reply(cfg.botReply(dbase.readRandom(cfg.REPLY_STORE)) + cfg.sig)
 
 def main(r):

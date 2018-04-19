@@ -1,4 +1,5 @@
 import os, re, random
+
 import config as cfg
 
 if cfg.STORE_TYPE is "memcache":
@@ -7,6 +8,8 @@ elif cfg.STORE_TYPE is "sqlite":
     import sqlite3
 elif cfg.STORE_TYPE is "mysql":
     import pymysql as mysql
+else:
+    raise cfg.ExitException("ERROR: store type not supported.")
 
 class DB:
     """ Database class. Supports SQLite and MySQL. """
@@ -15,7 +18,7 @@ class DB:
         self.dbtype = dbtype
         dbexists = True
         
-        if dbtype is "sqlite":
+        if self.dbtype is "sqlite":
             cfg.DATABASE += ".db"
             if not os.path.isfile(cfg.DATABASE):
                 dbexists = False
@@ -26,7 +29,7 @@ class DB:
                     err + "\nERROR: Cannot create or connect to "+ cfg.DATABASE)
             self.store.row_factory = lambda cursor, row: row[0]
 
-        elif dbtype is "mysql":
+        elif self.dbtype is "mysql":
             try:
                 self.store = mysql.connect(host=cfg.MYSQL_HOST,
                                            user=cfg.MYSQL_USER,
@@ -45,7 +48,7 @@ class DB:
                 dbexists = False
             cur.close()
 
-        elif dbtype is "memcache":
+        elif self.dbtype is "memcache":
             try:
                 self.store = memcache.Client(['localhost:11211'], debug=1)
                 if cfg.DEBUG:
@@ -88,8 +91,8 @@ class DB:
         try:
             cur = self.store.cursor()
             cur.execute(stmt)
-        except:
-            raise cfg.ExitException("ERROR: Cannot execute " + stmt)
+        except Exception as err:
+            raise cfg.ExitException(err + "\nERROR: Cannot execute " + stmt)
         finally:
             cur.close()
 
@@ -100,7 +103,7 @@ class DB:
             cur = self.store.cursor()
             cur.execute("SELECT "+ stmt)
             data = cur.fetchall()
-        except sqlite3.Error as err:
+        except Exception as err:
             raise cfg.ExitException(err + "\nERROR: Cannot execute SELECT " + stmt)
         finally:
             cur.close()

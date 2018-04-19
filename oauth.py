@@ -7,7 +7,6 @@ def auth():
     # Reddit account and API OAuth information. You can hardcode values here but
     # it creates a security risk if your code is public (on Github, etc.)
     # Otherwise, set the environment variables on your host as below.
-    cfg.ZENBOT_USERNAME = os.environ['ZENBOT_USERNAME']
     cfg.ZENBOT_PASSWORD = os.environ['ZENBOT_PASSWORD']
     cfg.ZENBOT_ID = os.environ['ZENBOT_ID']
     cfg.ZENBOT_SECRET = os.environ['ZENBOT_SECRET']

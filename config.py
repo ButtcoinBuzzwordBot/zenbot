@@ -1,6 +1,4 @@
 # Zen Bot configuration file. Bleep bloop.
-#
-# TODO: rewrite template system to find replace vars including nested.
 
 import os
 
@@ -10,6 +8,10 @@ DEBUG = False
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
+ZENBOT_USERNAME = os.environ['ZENBOT_USERNAME']
+
+# Reddit accounts to ignore in bot inbox.
+IGNORE = [ZENBOT_USERNAME, AUTHOR, "reddit"]
 
 # If HOSTED is True the script runs indefinitely. Set appropriate storage type and
 # info based on your hosting options. Both SQLite and MySQL default to UTF-8 for

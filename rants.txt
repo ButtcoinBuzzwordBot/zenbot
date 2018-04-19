@@ -527,6 +527,8 @@ Bitcoin#
 Bitcoin Original
 Tether
 Dietbitcoin
+SaveDroid
+SVD
 
 [wallet]
 a multisig wallet
