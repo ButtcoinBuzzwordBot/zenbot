@@ -11,7 +11,7 @@ def checkInbox(r, dbase):
     """ Check inbox and reply randomly to new messages from regular users. """
 
     msgs = list(r.inbox.unread(limit=None))
-    if len(msgs) > 0 and not cfg.HOSTED:
+    if cfg.DEBUG or (len(msgs) > 0 and not cfg.HOSTED):
         print(str(len(msgs)) +" message(s) in /u/"+ cfg.ZENBOT_USERNAME +"\'s inbox.")
 
     for msg in msgs:
@@ -26,6 +26,8 @@ def main(r):
     if len(sys.argv) > 1:
         cmdline.processOpts(dbase, sys.argv)
     dbase.checkDB()
+    if cfg.DEBUG:
+        print ("Type CRTL-C CTRL-C to exit.")
 
     while True:
         checkInbox(r, dbase)
@@ -62,12 +64,14 @@ def main(r):
         except cfg.ExitException as err:
             print(err)
             exit()
-        except:
-            if cfg.DEBUG: traceback.print_exc()
-            time.sleep(cfg.SLEEP_TIMEOUT)
-            if cfg.DEBUG: print("ERROR: Reddit timeout, resuming.")
-
-    dbase.closeDB()
+        except ReadTimeout as err:
+            time.sleep(60)
+            if cfg.DEBUG: print(err + "\nERROR: Reddit timeout, resuming.")
+        except Exception as err:
+            time.sleep(60)
+            if cfg.DEBUG: print(err + "\nERROR: Reddit error, resuming.")
+        finally:
+            dstore.closeDB()
 
 if __name__ == '__main__':
     main(oauth.auth())
