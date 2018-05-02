@@ -63,4 +63,5 @@ class Rants:
                 val = self.getTerm(key)
             template += ltext + val
 
-        return(template.replace("\\n", "\n") + text)
+        template += text
+        return(template.replace("\\n", "\n"))

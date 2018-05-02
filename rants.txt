@@ -35,6 +35,7 @@ Eat my smegma
 Eat a mound of dirt
 Eat your dad
 Eat my shit
+You''re an ignorant little shithead
 
 [recipient]
 bitcoin maximalist shill
@@ -168,6 +169,7 @@ Listen up, buttmonkey
 Open your ears you sod
 Borrow a brain dude
 Yeah, I''m sure
+Jesus Christ
 
 [exclamation]
 Holy crap
@@ -384,6 +386,8 @@ Kaare Klint
 Solmer Vedel
 Vasegaard
 Per-Aspera
+Nath Sampradaya
+Kriya
 
 [effect]
 fibonacci retracement
@@ -481,7 +485,7 @@ pe-modulated prime number generation
 quantum diffusion
 waveform collapse modulation
 Elliot Waveform collapse
-retroaction bilateral interpretation
+retroactive bilateral interpretation
 
 [coin]
 Bitcoin
@@ -707,6 +711,7 @@ a former wagecuck
 The Man
 bankers on Wall Street
 Federal gov''t
+the governments
 statist governments
 jack-booted statists
 jack-booted thugs
@@ -798,7 +803,32 @@ knuckle-dragger
 mouth-breather
 adult diaper fetishist
 
+[crime]
+tax fraud
+money laundering
+sex trafficking
+child pornography
+illegal drugs
+illegal weapons
+modified weapons
+buy tanks and grenades
+prostitution
+hire hit men
+murder-for-hire
+paying corrupt lawyers
+break the law
+ransomware
+blackmail
+contravention of existing rules and regulations
+various other kinds of fraud
+various kinds of illicit activity
+
 [criminal]
+corrupt politican
+corrupt lawyer
+black hat hacker
+blackmailer
+wanted suspect
 convicted felon
 known pedophile
 obvious scammer
@@ -871,6 +901,7 @@ gold-plated tombstone
 staute of myself
 
 [goodthing]
+live the unbanned life
 survive the upcoming apocalypse
 survive the coming zombie invasion
 survive the next depression
@@ -1136,6 +1167,7 @@ sociopaths
 self-proclaimed polymaths
 C-level executives
 Flat Earthers
+boot-licking Statists
 
 [event]
 interstate AA meeting
@@ -1199,7 +1231,7 @@ Haramburglar
 Charlie Lee
 Charlie Shrem
 Vitalik Butterin
-The Winklevoss Twins
+the Winklevoss Twins
 Barry Silbert
 Tim Draper
 Paris Hilton
@@ -1208,6 +1240,7 @@ DJ Khaled
 Ghostface Killah
 Jamie Foxx
 a pathetic bagholder
+Freemen-Of-The-Land
 
 [worldleader]
 Uncle Sam
@@ -1344,6 +1377,8 @@ last person picked in gym class
 lonely hording shut-in
 stupid corporate statist
 Communist sympathizer
+Ghurka warrior priest
+pathetic weasel
 
 [calls]
 outcall only
@@ -1410,6 +1445,7 @@ utterly astounded
 laughing behind your back
 
 [scam]
+Ponzi
 Amway
 backroom dog fighting
 the goldbug thing
@@ -1441,6 +1477,23 @@ broke my kid''s piggy bank
 cashed out my IRA
 sold all my other buttcoins
 
+[partner]
+IBM
+Bosch
+xvideos
+The Daily Stormer
+Juicero
+J.P. Morgan
+Pornhub
+Lil'' People Porntube
+Oracle
+Raw Water Inc.
+John McAfee
+Microsoft
+UWork
+Fiverr
+Amazon Mechanical Turk
+
 [promotion]
 great memes
 sponsored nascar drivers
@@ -1456,3 +1509,18 @@ thumbs-up from a holistic healer
 massive airdrops
 YouTube shilling
 a partnership with some Real Company™
+
+[site]
+Reddit redpill
+4chan
+PornHub
+incels sub
+Crossdressers Anonymous
+TheDonald
+Minecraft forums
+
+[tech]
+blockchain
+immutability
+digital ledger
+cryptographic security

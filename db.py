@@ -236,7 +236,7 @@ class DB:
         if self.dbtype is "memcache":
             self.store.set(cfg.VISITED_STORE, cfg.already_visited)
         else:
-            self.executeStmt("DELETE FROM "+ cfg.VISITED_STORE)
+            self.deleteTable(cfg.VISITED_STORE)
             for visited in cfg.already_visited:
                 stmt = "INSERT INTO "+ cfg.VISITED_STORE +" VALUES ('"+ visited +"')"
                 self.executeStmt(stmt)

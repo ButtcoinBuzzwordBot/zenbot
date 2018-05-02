@@ -73,7 +73,11 @@ def processOpts(db, argv) -> None:
 
             db.deleteTable(df)
             for line in data:
-                db.executeStmt("INSERT INTO " + df + " VALUES ('" + line + "')")
+                try:
+                    db.executeStmt("INSERT INTO " + df + " VALUES ('" + line + "')")
+                except:
+                    print("ERROR: likely single quote in:\n" + line)
+                    exit()
             print("Imported " + str(len(data)) + " entries into " + df)
 
     db.closeDB()

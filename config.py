@@ -33,11 +33,11 @@ DATABASE = "zenbot"
 
 # Example: odds set at 1000 are approx. 1-in-1000 chance to post.
 KOAN_STORE = "koans"
-KOAN_ODDS = 20
+KOAN_ODDS = 15
 HAIKU_STORE = "haiku"
 HAIKU_ODDS = 15
 REPLY_STORE = "replies"
-REPLY_ODDS = 30
+REPLY_ODDS = 21
 RANT_STORE = "rants"
 RANT_TABLE = "lex_insult"
 TEMPLATE_STORE = "templates"
@@ -50,7 +50,7 @@ MAX_VISITED = 5000
 # Drops quickly as karma increases, can go down to 10 seconds minimum.
 RATELIMIT = 10
 SUBLIMIT = 25
-SLEEP_LOOP = 10 * 60
+SLEEP_LOOP = 5 * 60
 SLEEP_TIMEOUT = 30
 
 # Triggers which active the bot to reply to a comment.
@@ -62,8 +62,9 @@ CMD_REPLY = TRIGGER + " quip"
 
 # Signatures for replies.
 sig = (
-    "\n_____\n\n^(Hi! I\'m a hand-run bot, *bleep* *bloop* "
-    "| Send praise, rage or arcade game tokens to /u/" + AUTHOR + ", *beep*)"
+    "\n_____\n^(Hi! I\'m a bot, *bleep* *bloop* | Send praise or rage to "
+    "/u/" + AUTHOR +
+    ". Submit rants, koans, etc. on /r/" + ZENBOT_USERNAME + ", *beep*)"
 )
 
 def botReply(reply):
@@ -72,6 +73,5 @@ def botReply(reply):
 # END OF SETTINGS.
 
 already_visited = []
-
 class ExitException(Exception):
     pass

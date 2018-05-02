@@ -1,4 +1,4 @@
-import time, random
+import time
 import praw
 import config as cfg, rants
 
@@ -49,7 +49,11 @@ class Comments:
             print("Posting reply to "+ str(self.post.id) +":\n"+ reply)
         elif not cfg.HOSTED: print("X", end="")
 
-        parent = self.getParent()
+        parent = self.getParent()    
+        if parent.author == "[deleted]":
+            if cfg.DEBUG: print("Post was deleted, skipping.")
+            return None
+
         if parent.author == cfg.ZENBOT_USERNAME:
             if cfg.DEBUG: print("Reply is to bot, skipping.")
             return None
@@ -58,11 +62,12 @@ class Comments:
             parent.reply(reply + cfg.sig)
             time.sleep(cfg.RATELIMIT)
             self.db.writeVisited()
-        except (praw.exceptions.APIException,
-                cfg.ExitException) as err:
+        except praw.exceptions.APIException as err:
             raise cfg.ExitException(err)
+        except:
+            raise cfg.ExitException("ERROR: Post reply error.")
 
-    def checkComment(self):
+    def checkComment(self) -> None:
         """ Post replies to random submissions and trigger replies. """
 
         if cfg.DEBUG: print("comment: "+ format(self.post))

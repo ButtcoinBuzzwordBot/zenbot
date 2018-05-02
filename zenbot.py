@@ -1,6 +1,6 @@
 # Bleep bloop! I am a Zen Bot. Om.
 
-import sys, traceback, random, time
+import sys, random, time
 
 import config as cfg
 import db
@@ -26,8 +26,8 @@ def main(r):
     if len(sys.argv) > 1:
         cmdline.processOpts(dbase, sys.argv)
     dbase.checkDB()
-    if cfg.DEBUG:
-        print ("Type CRTL-C CTRL-C to exit.")
+    if cfg.DEBUG and not cfg.HOSTED:
+        print ("Type CTRL-C to exit.")
 
     while True:
         checkInbox(r, dbase)
@@ -59,19 +59,18 @@ def main(r):
             if not cfg.HOSTED:
                 print("\nBleep! All done.")
                 break
-            else: time.sleep(cfg.SLEEP_LOOP)
+            else:
+                if cfg.DEBUG: print("Sleeping. Zzzz...")
+                time.sleep(cfg.SLEEP_LOOP)
 
         except cfg.ExitException as err:
             print(err)
             exit()
-        except ReadTimeout as err:
-            time.sleep(60)
-            if cfg.DEBUG: print(err + "\nERROR: Reddit timeout, resuming.")
         except Exception as err:
-            time.sleep(60)
-            if cfg.DEBUG: print(err + "\nERROR: Reddit error, resuming.")
-        finally:
-            dstore.closeDB()
+            if cfg.DEBUG: print(err + "\nERROR: Reddit timeout, will resume.")
+            time.sleep(cfg.SLEEP_TIMEOUT)
+
+    dbase.closeDB()
 
 if __name__ == '__main__':
     main(oauth.auth())
