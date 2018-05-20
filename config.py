@@ -4,14 +4,14 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
 ZENBOT_USERNAME = os.environ['ZENBOT_USERNAME']
 
 # Reddit accounts to ignore in bot inbox.
-IGNORE = [ZENBOT_USERNAME, AUTHOR, "reddit"]
+IGNORE = [ZENBOT_USERNAME, AUTHOR, "reddit", "tippr"]
 
 # If HOSTED is True the script runs indefinitely. Set appropriate storage type and
 # info based on your hosting options. Both SQLite and MySQL default to UTF-8 for
@@ -33,11 +33,11 @@ DATABASE = "zenbot"
 
 # Example: odds set at 1000 are approx. 1-in-1000 chance to post.
 KOAN_STORE = "koans"
-KOAN_ODDS = 15
+KOAN_ODDS = 8
 HAIKU_STORE = "haiku"
-HAIKU_ODDS = 15
+HAIKU_ODDS = 6
 REPLY_STORE = "replies"
-REPLY_ODDS = 21
+REPLY_ODDS = 400
 RANT_STORE = "rants"
 RANT_TABLE = "lex_insult"
 TEMPLATE_STORE = "templates"
@@ -64,7 +64,7 @@ CMD_REPLY = TRIGGER + " quip"
 sig = (
     "\n_____\n^(Hi! I\'m a bot, *bleep* *bloop* | Send praise or rage to "
     "/u/" + AUTHOR +
-    ". Submit rants, koans, etc. on /r/" + ZENBOT_USERNAME + ", *beep*)"
+    "| Submit rants, koans, etc. on /r/" + ZENBOT_USERNAME + ", *beep*)"
 )
 
 def botReply(reply):

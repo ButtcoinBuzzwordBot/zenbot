@@ -13,7 +13,7 @@ def auth():
 
     # Initialize PRAW with custom User-Agent.
     if cfg.DEBUG:
-        cfg.SUBREDDIT = "testingground4bots"
+        #cfg.SUBREDDIT = "testingground4bots"
         print("Username/pass: " + cfg.ZENBOT_USERNAME +" / "+ cfg.ZENBOT_PASSWORD)
         print("Client ID/pass: " + cfg.ZENBOT_ID +" / "+ cfg.ZENBOT_SECRET)
         print("Authenticating...")

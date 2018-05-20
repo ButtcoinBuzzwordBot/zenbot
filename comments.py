@@ -83,10 +83,10 @@ class Comments:
         self.markVisited()
 
         if (cfg.TRIGGER in self.post.body):
-            if (cfg.CMD_RANT in self.post.body):
-                self.postReply(rants.Rants(self.db).getTemplate())
-            elif (cfg.CMD_KOAN in self.post.body):
+            if (cfg.CMD_KOAN in self.post.body):
                 self.postReply(self.db.readRandom(cfg.KOAN_STORE))
+            elif (cfg.CMD_RANT in self.post.body):
+                self.postReply(rants.Rants(self.db).getTemplate())
             elif (cfg.CMD_HAIKU in self.post.body):
                 self.postReply(self.db.readRandom(cfg.HAIKU_STORE))
             elif (cfg.CMD_REPLY in self.post.body):

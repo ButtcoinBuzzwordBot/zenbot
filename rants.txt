@@ -969,6 +969,7 @@ year
 decade
 
 [namecall]
+little bitch
 weak hand
 chicken fucker
 cow tipper
@@ -1168,6 +1169,7 @@ self-proclaimed polymaths
 C-level executives
 Flat Earthers
 boot-licking Statists
+hackers
 
 [event]
 interstate AA meeting
@@ -1231,7 +1233,6 @@ Haramburglar
 Charlie Lee
 Charlie Shrem
 Vitalik Butterin
-the Winklevoss Twins
 Barry Silbert
 Tim Draper
 Paris Hilton
@@ -1239,8 +1240,11 @@ Floyd Mayweather
 DJ Khaled
 Ghostface Killah
 Jamie Foxx
-a pathetic bagholder
+
+[butters]
+pathetic bagholders
 Freemen-Of-The-Land
+Winklevoss Twins
 
 [worldleader]
 Uncle Sam
@@ -1524,3 +1528,28 @@ blockchain
 immutability
 digital ledger
 cryptographic security
+multiple copies of Excel spreadsheets
+
+[country]
+the UK
+the USA
+Russia
+Korea
+Decentralizalia
+Liberland
+Sweden
+the darkweb
+
+[exchange]
+Bitfinex
+Binance
+Bitmex
+Coinbase
+Kraken
+Gemini
+darkweb
+
+[field]
+literature history
+French baroque poetry
+flat-earth history

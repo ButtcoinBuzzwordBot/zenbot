@@ -209,7 +209,7 @@ class DB:
         else:
             if self.dbtype is "sqlite": rand = "RANDOM()"
             else: rand = "RAND()"
-            data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 5")
+            data = self.fetchStmt("* FROM "+ name +" ORDER BY "+ rand +" LIMIT 7")
             if data is None:
                 raise cfg.ExitException(
                     "ERROR: Please import " + name + " into database.")
