@@ -4,7 +4,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = True
+DEBUG = False
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"
@@ -49,7 +49,7 @@ MAX_VISITED = 5000
 # Start rate limit at 600 (10 minutes) per reply for a bot account w/no karma.
 # Drops quickly as karma increases, can go down to 10 seconds minimum.
 RATELIMIT = 10
-SUBLIMIT = 25
+SUBLIMIT = 50
 SLEEP_LOOP = 5 * 60
 SLEEP_TIMEOUT = 30
 

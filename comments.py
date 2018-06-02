@@ -53,11 +53,13 @@ class Comments:
         if parent.author == "[deleted]":
             if cfg.DEBUG: print("Post was deleted, skipping.")
             return None
-
-        if parent.author == cfg.ZENBOT_USERNAME:
+        elif parent.author == cfg.ZENBOT_USERNAME:
             if cfg.DEBUG: print("Reply is to bot, skipping.")
             return None
-
+        elif parent.author == cfg.AUTHOR:
+            if cfg.DEBUG: print("Replying to poster instead.")
+            parent = self.post
+            
         try:
             parent.reply(reply + cfg.sig)
             time.sleep(cfg.RATELIMIT)
