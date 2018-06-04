@@ -4,7 +4,7 @@ import os
 
 # When DEBUG is True the bot uses /r/testingground4bots, set in oauth.py.
 
-DEBUG = False
+DEBUG = True
 AUTHOR = "BarcaloungerJockey"
 BOTNAME = "python:zenmaster.bot:v1.2 (by /u/" + AUTHOR +")"
 SUBREDDIT = "buttcoin"

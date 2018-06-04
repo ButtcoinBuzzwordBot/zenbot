@@ -50,7 +50,7 @@ class Comments:
         elif not cfg.HOSTED: print("X", end="")
 
         parent = self.getParent()    
-        if parent.author == "[deleted]":
+        if parent.author is None or parent.author == "[deleted]":
             if cfg.DEBUG: print("Post was deleted, skipping.")
             return None
         elif parent.author == cfg.ZENBOT_USERNAME:

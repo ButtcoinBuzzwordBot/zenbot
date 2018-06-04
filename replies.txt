@@ -203,7 +203,7 @@ duel, however, he will not only have plenty of preparation time to layer
 shields, but will also be free from any mana-conservation concerns - allowing
 him to nova with impunity. Thus, he would have a very good chance of defeating a
 purely physical fighter of comparable level.|
-I enjoyed your slurs and expletives. Now for your argument?|
+I very much enjoyed your slurs and expletives, but I completely missed your point?|
 Remember: when a black cat crosses your path, it''s probably because it has some
 important cat stuff to do.|
 Remember: the devil doesn''t come to you with an ugly, red face and scary
@@ -236,6 +236,17 @@ If you''re close enough to read this I''m going to follow you home.|
 Would you agree that refunds are in order?|
 I am sorry but you will have to go to the service desk for help.|
 I am pumping, and I am dumping. Bags are filling, while I''m shilling.|
-Did you hear the one about the guy who put his dog on a blockchain? Yeah, me neither.|
+Did you hear the one about the guy who put his dog on a blockchain? Yeah, me
+neither.|
 If any of these virtual token nitwits were tasked with designing a new car, it
-would have 12 wheels, run on propane and be made of balsa wood.
+would have 12 wheels, run on propane and be made of balsa wood.|
+A famous programmer once said, "There are two ways to write error-free programs;
+only the third one works." That''s why love ternary!|
+```def understandingRecursion(knowledge: dict) -> dict:
+    understandingRecursion(knowledge)```|
+Don''t treat a semicolon as the end of a line but rather as a possibility of a
+new beginning.|
+The downside of ternary is that if you''re wrong, you''re off by more than a bit.|
+The one language all programmers are proficient in is profanity.|
+Q: Why did the multithreaded chicken cross the road?  
+A: other to side. To the get.
